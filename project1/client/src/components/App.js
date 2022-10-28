@@ -3,15 +3,15 @@ import LeftSide from "components/LeftSide";
 import RightSide from "components/RightSide";
 import { BrowserRouter } from "react-router-dom";
 
-import axios from "axios";
 import { useEffect } from "react";
+import axios from "axios";
 
 function App() {
+    const callApi = async () => {
+        axios.get("/api/student").then((res) => console.log(res.data));
+    };
     useEffect(() => {
-        axios
-            .get("api/test")
-            .then((res) => console.log(res))
-            .catch();
+        callApi();
     }, []);
     return (
         <div className="wrapper">
