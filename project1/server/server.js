@@ -1,10 +1,16 @@
 const express = require("express");
 const app = express();
 
-const student = require("./routes/student");
-const course = require("./routes/course");
+// const selectAll = require("./routes/selectAll");
+const login = require("./routes/login");
+const getClass = require("./routes/getClass");
 
-app.use("/api", student);
-app.use("/api", course);
+app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+
+app.use("/api", login);
+app.use("/api", getClass);
+
 const port = 4000;
-app.listen(port, () => console.log(`${port}`));
+app.listen(port, () => console.log(`Running server on port ${port}`));
