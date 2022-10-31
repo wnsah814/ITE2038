@@ -1,0 +1,15 @@
+.container {
+    z-index: 99999;
+    color: white;
+    position: fixed;
+    right: 2.5rem;
+    padding: 1.5rem;
+    width: 15rem;
+    height: 7rem;
+    background-color: #898c8e;
+    border-radius: 0.25rem;
+}
+
+.Btn {
+    padding: 0.5rem;
+}

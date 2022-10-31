@@ -1,15 +1,31 @@
 import AppRouter from "components/Router";
+import MiniProfile from "./MiniProfile";
 
-const RightSide = () => {
+const RightSide = ({ userObj, setUserObj }) => {
+    const showProfile = () => {
+        document.querySelector("#profileContainer").style.display = "block";
+    };
+
+    const hideProfile = () => {
+        document.querySelector("#profileContainer").style.display = "none";
+    };
     return (
         <div className="rightSide">
-            <header>
-                <div className="header_top">
-                    <div className="header_item language">
-                        <p>lang</p>
-                    </div>
-                    <div className="header_item_right profile">
-                        <p>Profile</p>
+            <header className="header_container">
+                <div className="header_item language">
+                    <p>무엇을 넣을까요</p>
+                </div>
+                <div
+                    onMouseEnter={showProfile}
+                    onMouseLeave={hideProfile}
+                    className="header_item_right profile"
+                >
+                    <p>Profile</p>
+                    <div style={{ display: "none" }} id="profileContainer">
+                        <MiniProfile
+                            userObj={userObj}
+                            setUserObj={setUserObj}
+                        />
                     </div>
                 </div>
             </header>
@@ -17,24 +33,10 @@ const RightSide = () => {
             <div className="container">
                 <div className="maincontent">
                     <div className="title">
-                        <p>title</p>
+                        <h4 id="maintitle">title</h4>
                     </div>
                     <div className="content">
-                        <AppRouter />
-
-                        <p>content</p>
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Impedit, vero recusandae expedita modi
-                            dignissimos eius at repudiandae voluptatum veniam
-                            suscipit voluptate quisquam praesentium magni esse
-                            atque, numquam maiores debitis quo!Lorem ipsum dolor
-                            sit, amet consectetur adipisicing elit. Impedit,
-                            vero recusandae expedita modi dignissimos eius at
-                            repudiandae voluptatum veniam suscipit voluptate
-                            quisquam praesentium magni esse atque, numquam
-                            maiores debitis quo! lorem
-                        </p>
+                        <AppRouter userObj={userObj} setUserObj={setUserObj} />
                     </div>
                 </div>
             </div>
