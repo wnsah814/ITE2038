@@ -9,7 +9,7 @@ Date: 2022/10/31
 
 ### **주어진 스키마**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled.png)
+![Untitled](images/Untitled.png)
 
 staff(관리자) 교수 추가했을 때 구분 할 것인
 
@@ -17,7 +17,7 @@ takes: class_id로 할 지 course_id 로 할 지
 
 ### **1차 설계**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%201.png)
+![Untitled](images/Untitled%201.png)
 
 -   staff(관리자)
     -   관리자의 정보를 저장해주는 릴레이션이다.
@@ -41,7 +41,7 @@ takes: class_id로 할 지 course_id 로 할 지
 
 ### **2차 설계**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%202.png)
+![Untitled](images/Untitled%202.png)
 
 -   staff에 교수님들을 아애 추가하는 방식으로 바꾸었다.
     -   원래는 관리자 로그인을 하면 staff와 lecturer table을 부르려 했지만 staff 하나만 부르고 교수님은 모두 관리자가 되는 것으로 설정하였다.
@@ -145,11 +145,10 @@ insert into takes values([id], [stu_id], [crs_id], [year], "W");
 1.  희망수업에 등록한 경우
 
     1.  조건
+
         1.  이전 성적이 B0 이상인 경우
             = 아래 sql 을 시행하여 얻은 모든 값이 A+, A0, B+, B0가 아닐 때여야함
-                ```sql
-                select grade from takes where student_id="[stu_id]" and course_id="[crs_id]";
-                ```
+            `sql select grade from takes where student_id="[stu_id]" and course_id="[crs_id]"; `
         2.  정원이 다 찼을 경우
 
             = 정원에 대한 새로운 속성이 필요할 것 같다.
@@ -160,12 +159,8 @@ insert into takes values([id], [stu_id], [crs_id], [year], "W");
 
         4.  최대 학점(18)을 넘기는 경우
             = 아래 수행 결과가 18을 넘기는지 확인
-                ```sql
-                select sum(credit)
-                from takes
-                natural join course
-                where student_id="[stu_id]" and year="[year]";
-                ```
+            `sql select sum(credit) from takes natural join course where student_id="[stu_id]" and year="[year]"; `
+
     2.  성공: grade → “N” : 결정되지 않았음(None). 수업을 수강중임을 나타냄
 
     ```sql
@@ -316,7 +311,7 @@ delete from takes where grade="W";
 
 **디자인**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%203.png)
+![Untitled](images/Untitled%203.png)
 
 **동작**
 
@@ -347,7 +342,7 @@ delete from takes where grade="W";
 
 **디자인**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%204.png)
+![Untitled](images/Untitled%204.png)
 
 ## **학생**
 
@@ -357,7 +352,7 @@ delete from takes where grade="W";
 
 **디자인**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%205.png)
+![Untitled](images/Untitled%205.png)
 
 수업번호, 학수번호, 교과목명을 입력하면 알아낼 수 있다.
 
@@ -369,7 +364,7 @@ delete from takes where grade="W";
 
 **디자인**
 
-![Untitled](Project#1%20%E1%84%89%E1%85%AE%E1%84%80%E1%85%A1%E1%86%BC%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8E%E1%85%A5%E1%86%BC%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%2084577e032ca74642a7ba9f2c4f840fe7/Untitled%206.png)
+![Untitled](images/Untitled%206.png)
 
 ## **관리자**
 
