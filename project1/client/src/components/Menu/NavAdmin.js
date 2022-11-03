@@ -1,11 +1,19 @@
+import { Link } from "react-router-dom";
+
 const NavAdmin = () => {
     return (
         <div className="nav_container">
             <h4 className="nav_title">Admin</h4>
             <ul>
-                <li className="nav_item">학생정보</li>
-                <li className="nav_item">과목정보</li>
-                <li className="nav_item">통계</li>
+                <li className="nav_item">
+                    <Link to="admin/classControl">수업 관리</Link>
+                </li>
+                <li className="nav_item">
+                    <Link to="admin/studentControl">학생 관리</Link>
+                </li>
+                <li className="nav_item">
+                    <Link to="admin/profile">내 정보</Link>
+                </li>
             </ul>
         </div>
     );

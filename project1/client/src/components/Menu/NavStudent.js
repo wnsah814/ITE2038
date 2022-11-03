@@ -9,7 +9,10 @@ const NavStudent = () => {
                     <Link to="/student/enrollment">수강신청</Link>
                 </li>
                 <li className="nav_item">
-                    <Link to="/student/basket">장바구니</Link>
+                    <Link to="/student/basket">희망수업</Link>
+                </li>
+                <li className="nav_item">
+                    <Link to="/student/applied">신청내역</Link>
                 </li>
                 <li className="nav_item">
                     <Link to="student/profile">내 정보</Link>

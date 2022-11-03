@@ -1,0 +1,47 @@
+.noClass {
+    flex: 1 0;
+}
+
+.class1 {
+    flex: 1 0;
+}
+
+.class2 {
+    flex: 2 0;
+}
+
+.class3 {
+    flex: 3 0;
+}
+
+.class4 {
+    flex: 4 0;
+}
+
+.class5 {
+    flex: 5 0;
+}
+.class6 {
+    flex: 6 0;
+}
+
+.class7 {
+    flex: 7 0;
+}
+
+.class8 {
+    flex: 8 0;
+}
+
+.class9 {
+    flex: 9 0;
+}
+
+.class10 {
+    flex: 10 0;
+}
+
+.color {
+    background-color: bisque;
+    height: 100%;
+}

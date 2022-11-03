@@ -1,6 +1,23 @@
 .wrapper {
     /* padding-top: 1.5rem; */
     width: 100%;
+    height: calc(100vh - 7rem);
+    overflow-y: scroll;
+}
+
+.background {
+    width: 100%;
+    height: 15rem;
+    opacity: 0.9;
+    /* opacity: 0; */
+    background: linear-gradient(to top, #171e32, #405189);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-15rem);
+    height: 100%;
 }
 
 .col {
@@ -31,7 +48,7 @@
 }
 
 .bottom {
-    height: 100vh;
+    height: 100%;
     /* flex: 1 0 auto; */
 }
 
@@ -63,16 +80,9 @@
 .editBtn {
     padding: 1rem;
 }
-.background {
-    position: absolute;
-    width: 100%;
-    height: 15rem;
-    opacity: 0.9;
-    /* opacity: 0; */
-    background: linear-gradient(to top, #171e32, #405189);
-}
 
 .container {
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -91,17 +101,19 @@
 
 .right {
     width: 75%;
+    height: 100%;
     flex: 0 0 auto;
 }
 
 .cbody {
     flex: 1 1 auto;
     padding: 1rem;
+    height: 100%;
 }
 
 .ctitle {
     margin-bottom: 1rem;
 }
 .timetable {
-    height: 30rem;
+    height: 100%;
 }

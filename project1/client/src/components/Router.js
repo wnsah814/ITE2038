@@ -6,34 +6,84 @@ import NotFound from "routes/special/NotFound";
 import SignIn from "routes/Authentication/SignIn";
 import StudentProfile from "routes/Student/StudentProfile";
 import Basket from "routes/Student/Basket";
+import Applied from "routes/Student/Applied";
+import AdminProfile from "routes/Admin/AdminProfile";
+import ClassControl from "routes/Admin/ClassControl";
+import StudentControl from "routes/Admin/StudentControl";
 
 const AppRouter = ({ userObj, setUserObj }) => {
     return (
         <>
             <Routes>
                 <Route path="/" element={<Announce />}></Route>
+                <Route path="/announce" element={<Announce />}></Route>
                 <Route
                     path="/signin"
                     element={<SignIn setUserObj={setUserObj} />}
                 ></Route>
-                <Route path="/announce" element={<Announce />}></Route>
-                <Route path="/handbook" element={<Handbook />}></Route>
+                <Route
+                    path="/handbook"
+                    element={<Handbook userObj={userObj} />}
+                ></Route>
                 {/* Student */}
                 <Route
                     path="/student/enrollment"
-                    element={<Enrollment />}
+                    element={<Enrollment userObj={userObj} />}
                 ></Route>
                 <Route
                     path="/student/profile"
-                    element={<StudentProfile setUserObj={setUserObj} />}
+                    element={
+                        <StudentProfile
+                            userObj={userObj}
+                            setUserObj={setUserObj}
+                        />
+                    }
                 ></Route>
 
                 <Route
                     path="/student/basket"
-                    element={<Basket setUserObj={setUserObj} />}
+                    element={
+                        <Basket userObj={userObj} setUserObj={setUserObj} />
+                    }
+                ></Route>
+
+                <Route
+                    path="/student/applied"
+                    element={
+                        <Applied userObj={userObj} setUserObj={setUserObj} />
+                    }
                 ></Route>
 
                 {/* Admin */}
+
+                <Route
+                    path="/admin/classControl"
+                    element={
+                        <ClassControl
+                            userObj={userObj}
+                            setUserObj={setUserObj}
+                        />
+                    }
+                ></Route>
+                <Route
+                    path="/admin/studentControl"
+                    element={
+                        <StudentControl
+                            userObj={userObj}
+                            setUserObj={setUserObj}
+                        />
+                    }
+                ></Route>
+                <Route
+                    path="/admin/profile"
+                    element={
+                        <AdminProfile
+                            userObj={userObj}
+                            setUserObj={setUserObj}
+                        />
+                    }
+                ></Route>
+
                 {/* Special */}
                 <Route path="*" element={<NotFound />}></Route>
             </Routes>

@@ -14,28 +14,13 @@ function App() {
 
     useEffect(() => {
         if (window.sessionStorage.getItem("id")) {
+            console.log("로그인 정보를 불러왔습니다.");
             setUserObj({
                 job: window.sessionStorage.getItem("job"),
                 id: window.sessionStorage.getItem("id"),
                 name: window.sessionStorage.getItem("name"),
                 sex: window.sessionStorage.getItem("sex"),
             });
-            // setIsSignedIn(true);
-            // if (window.sessionStorage.getItem("job") === "student") {
-            //     setUserObj({
-            //         job: window.sessionStorage.getItem("job"),
-            //         student_id: window.sessionStorage.getItem("id"),
-            //         name: window.sessionStorage.getItem("name"),
-            //         sex: window.sessionStorage.getItem("sex"),
-            //     });
-            // } else {
-            //     setUserObj({
-            //         job: window.sessionStorage.getItem("job"),
-            //         staff_id: window.sessionStorage.getItem("staff_id"),
-            //         name: window.sessionStorage.getItem("name"),
-            //         sex: window.sessionStorage.getItem("sex"),
-            //     });
-            // }
         }
     }, []);
     return (
