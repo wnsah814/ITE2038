@@ -21,7 +21,6 @@ const SignIn = ({ setUserObj }) => {
         e.preventDefault();
         const uid = idRef.current.value;
         const upw = pwdRef.current.value;
-        // axios.post("/api/student").then((res) => console.log(res.data));
         if (uid === "" || uid === undefined) {
             alert("Pleast enter your ID");
             idRef.current.focus();
@@ -43,18 +42,17 @@ const SignIn = ({ setUserObj }) => {
                 console.log(res.data);
                 if (res.data.job !== "none") {
                     window.sessionStorage.setItem("job", res.data.job);
-                    window.sessionStorage.setItem("uid", idRef);
-                    window.sessionStorage.setItem("uname", res.data.name);
-                    window.sessionStorage.setItem("usex", res.data.sex);
+                    window.sessionStorage.setItem("id", idRef.current.value);
+                    window.sessionStorage.setItem("name", res.data.name);
+                    window.sessionStorage.setItem("sex", res.data.sex);
                     // 세션스토리지에 key : id , value : idRef.current.value로 저장
                     // sessionsStorage는 창 닫으면 사라짐, localStorage는 안사라짐
-                    // setIsSignedIn(true);
                     setUserObj(res.data);
                     navigate("/");
                 } else {
                     alert("Wrong ID or password");
-                    idRef.current.value = "";
-                    pwdRef.current.value = "";
+                    // idRef.current.value = "";
+                    // pwdRef.current.value = "";
                     navigate("/signin");
                 }
             })

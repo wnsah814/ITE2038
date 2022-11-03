@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import styles from "routes/Common/Announce.module.css";
 
-const Announce = () => {
+const Announce = ({ userObj, setUserObj }) => {
     useEffect(() => {
-        const title = "공지사항 살려주세요";
+        const title = "공지사항";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
     return (

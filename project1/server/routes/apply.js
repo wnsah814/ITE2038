@@ -4,49 +4,11 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
-router.post("/getClass", (req, res) => {
-    const reqObj = {
-        class_id: req.body.class_id,
-        course_id: req.body.course_id,
-        name: req.body.name,
-        year: req.body.year,
-    };
-    let where = ` where opened=${reqObj.year}`;
-    if (reqObj.class_id === "") {
-        if (reqObj.course_id === "") {
-            if (reqObj.name === "") {
-                // 1
-            } else {
-                // 2
-                where += ` and class_name like "%${reqObj.name}%"`;
-            }
-        } else {
-            where = ` and course_id="${reqObj.course_id}"`;
-            if (reqObj.name === "") {
-                // 3
-            } else {
-                where += ` and class_name like "%${reqObj.name}%"`;
-            }
-        }
-    } else {
-        where = ` and class_id=${reqObj.class_id}`;
-        if (reqObj.course_id === "") {
-            if (reqObj.name === "") {
-                // 7
-            } else {
-                //8
-                where += ` and class_name like "%${reqObj.name}%"`;
-            }
-        } else {
-            where += ` and course_id="${reqObj.course_id}"`;
-            if (reqObj.name === "") {
-                // 5
-            } else {
-                where += ` and class_name like "%${reqObj.name}%"`;
-                //6
-            }
-        }
-    }
+router.post("/getapplied", (req, res) => {
+    const student_id = req.body.student_id;
+
+    console.log(">>>", student_id);
+
     const queryString =
         "with \
         cls_crs(class_id, class_no, course_id, major_id, year, lecturer_id, person_max, opened, room_id, class_name, credit) as ( \
@@ -82,12 +44,23 @@ router.post("/getClass", (req, res) => {
             from CLRB \
             natural left join totTime \
         ) \
-        select * from total" +
-        where +
-        " order by class_name;";
+        select * from total where class_id in (select class_id from applied where student_id=?) order by class_name;";
+    connection.query(queryString, [student_id], (err, rows) => {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
 
-    // console.log(`query: ${queryString}`);
-    connection.query(queryString, (err, rows) => {
+router.post("/apply", (req, res) => {
+    const student_id = req.body.student_id;
+    const class_id = req.body.class_id;
+
+    console.log(">>>", student_id, class_id);
+
+    const queryString =
+        "insert into applied(student_id,class_id) values(?, ?);";
+
+    connection.query(queryString, [student_id, class_id], (err, rows) => {
         if (err) throw err;
         res.send(rows);
     });

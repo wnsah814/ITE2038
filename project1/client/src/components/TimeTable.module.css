@@ -1,0 +1,76 @@
+.timetable {
+    display: flex;
+    /* justify-content: space-around; */
+    height: 40rem;
+}
+
+.day {
+    flex: 1 0 auto;
+    display: flex;
+    /* height: 3rem; */
+    flex-direction: column;
+}
+
+.dayName {
+    text-align: center;
+    height: 3rem;
+}
+
+.classes {
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+    height: 100%;
+    /* border: 1px solid black; */
+}
+
+.oneBlock {
+    flex: 1 0 auto;
+}
+
+/* .timetable div {
+    border: 1px solid black;
+} */
+
+.noClass {
+    flex: 1 0;
+}
+
+.class1 {
+    flex: 1 0;
+}
+
+.class2 {
+    flex: 2 0;
+}
+
+.class3 {
+    flex: 3 0;
+}
+
+.class4 {
+    flex: 4 0;
+}
+
+.class5 {
+    flex: 5 0;
+}
+.class6 {
+    flex: 6 0;
+}
+
+.class7 {
+    flex: 7 0;
+}
+
+.class8 {
+    flex: 8 0;
+}
+
+.class9 {
+    flex: 9 0;
+}
+
+.class10 {
+    flex: 10 0;
+}

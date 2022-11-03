@@ -1,15 +1,13 @@
 import axios from "axios";
-import ApplyBtn from "components/ApplyBtn";
 import { useEffect, useState } from "react";
-import styles from "./Basket.module.css";
+import styles from "./Applied.module.css";
 const Basket = ({ userObj, setUserObj }) => {
     useEffect(() => {
-        const title = "희망수업";
+        const title = "신청내역";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
 
     const ths = [
-        "수강신청",
         "수업번호",
         "학수번호",
         "교과목명",
@@ -67,14 +65,12 @@ const Basket = ({ userObj, setUserObj }) => {
             .toString()
             .padStart(2, "0")}`;
         return timeStr;
-        // console.log(day_start);
-        // console.log(day_end);
     };
 
-    const getWantedClass = () => {
+    const getAppliedClass = () => {
         console.log(userObj.id, "my id");
         axios
-            .post("http://localhost:4000/api/getwant", {
+            .post("http://localhost:4000/api/getapplied", {
                 student_id: userObj.id,
             })
             .then((res) => {
@@ -90,7 +86,7 @@ const Basket = ({ userObj, setUserObj }) => {
             });
     };
     useEffect(() => {
-        getWantedClass();
+        getAppliedClass();
     }, []);
     return (
         <div className={styles.wrapper}>
@@ -110,12 +106,6 @@ const Basket = ({ userObj, setUserObj }) => {
                             ? myClass.map((v, i) => (
                                   <tr key={i} className={styles.tr}>
                                       <td className={styles.td}>
-                                          <ApplyBtn
-                                              vector={v}
-                                              userObj={userObj}
-                                          />
-                                      </td>
-                                      <td className={styles.td}>
                                           {v.class_no}
                                       </td>
                                       <td className={styles.td}>
@@ -134,7 +124,6 @@ const Basket = ({ userObj, setUserObj }) => {
                                               v.begin2,
                                               v.end2
                                           )}
-                                          {/* {`\n${myClass[i].begin1}`} */}
                                       </td>
                                       <td className={styles.td}>
                                           {v.person_max}

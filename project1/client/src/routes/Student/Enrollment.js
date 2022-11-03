@@ -1,8 +1,10 @@
 import axios from "axios";
+import ApplyBtn from "components/ApplyBtn";
+import WishBtn from "components/WishBtn";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Enrollment.module.css";
 
-const Handbook = () => {
+const Handbook = ({ userObj }) => {
     const hb_classID = useRef();
     const hb_courseID = useRef();
     const hb_name = useRef();
@@ -44,6 +46,7 @@ const Handbook = () => {
     };
     const ths = [
         "수강신청",
+        "희망신청",
         "수업번호",
         "학수번호",
         "교과목명",
@@ -55,7 +58,6 @@ const Handbook = () => {
     ];
     const showTime = (start1, end1, start2, end2) => {
         let time = "";
-        console.log(start1);
         if (start1 === null || start1 === undefined || start1 === "") {
             time = "정보없음";
             return time;
@@ -100,15 +102,12 @@ const Handbook = () => {
             .toString()
             .padStart(2, "0")}`;
         return timeStr;
-        // console.log(day_start);
-        // console.log(day_end);
     };
 
     useEffect(() => {
         searchClass();
     }, []);
     return (
-        // className={styles.}
         <div className={styles.wrapper}>
             <div className={styles.container}>
                 <div className={styles.searchOption}>
@@ -130,26 +129,16 @@ const Handbook = () => {
                         type="text"
                         placeholder="교과목명"
                     />
-                    <select name="year" onChange={onYearChange}>
-                        <option value="2022" selected={yearSelected === 2022}>
-                            2022
-                        </option>
-                        <option value="2021" selected={yearSelected === 2021}>
-                            2021
-                        </option>
-                        <option value="2020" selected={yearSelected === 2020}>
-                            2020
-                        </option>
-                        <option value="2019" selected={yearSelected === 2019}>
-                            2019
-                        </option>
+                    <select
+                        name="year"
+                        onChange={onYearChange}
+                        value={yearSelected}
+                    >
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
                     </select>
-                    {/* <input
-                        
-                        className={styles.input}
-                        type="option"
-                        placeholder="교과목명"
-                    /> */}
                     <button className={styles.button} onClick={searchClass}>
                         검색
                     </button>
@@ -173,9 +162,16 @@ const Handbook = () => {
                                 ? result.map((v, i) => (
                                       <tr key={i} className={styles.tr}>
                                           <td className={styles.td}>
-                                              <button className={styles.btn}>
-                                                  신청
-                                              </button>
+                                              <ApplyBtn
+                                                  vector={v}
+                                                  userObj={userObj}
+                                              />
+                                          </td>
+                                          <td className={styles.td}>
+                                              <WishBtn
+                                                  vector={v}
+                                                  userObj={userObj}
+                                              />
                                           </td>
                                           <td className={styles.td}>
                                               {v.class_no}
@@ -211,7 +207,7 @@ const Handbook = () => {
                                           </td>
                                       </tr>
                                   ))
-                                : ""}
+                                : null}
                         </tbody>
                     </table>
                 </div>

@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import styles from "./StudentProfile.module.css";
 import profileImg from "assets/images/profile.png";
 import lionImg from "assets/images/hyu_lion.jpg";
-const StudentProfile = ({ setUserObj }) => {
+import TimeTable from "components/TimeTable";
+const StudentProfile = ({ userObj, setUserObj }) => {
     useEffect(() => {
         const title = "내 정보";
         document.querySelector("#maintitle").innerHTML = title;
@@ -13,7 +14,7 @@ const StudentProfile = ({ setUserObj }) => {
             <div className={styles.background}>
                 <img className={styles.lionImg} src={lionImg} alt="lion" />
             </div>
-            <div className={styles.col}>
+            <div className={styles.profile}>
                 <div className={styles.top}>
                     <div className={styles.row}>
                         <div>
@@ -90,7 +91,7 @@ const StudentProfile = ({ setUserObj }) => {
                                         <h5>시간표</h5>
                                     </div>
                                     <div className={styles.timetable}>
-                                        <p>대충 시간표</p>
+                                        <TimeTable userObj={userObj} />
                                     </div>
                                 </div>
                             </div>

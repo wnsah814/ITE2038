@@ -1,5 +1,6 @@
 import AppRouter from "components/Router";
 import MiniProfile from "./MiniProfile";
+import styles from "./RightSide.module.css";
 
 const RightSide = ({ userObj, setUserObj }) => {
     const showProfile = () => {
@@ -10,15 +11,15 @@ const RightSide = ({ userObj, setUserObj }) => {
         document.querySelector("#profileContainer").style.display = "none";
     };
     return (
-        <div className="rightSide">
-            <header className="header_container">
-                <div className="header_item language">
+        <div className={styles.wrapper}>
+            <div className={styles.headerContainer}>
+                <div className={styles.headerItem}>
                     <p>무엇을 넣을까요</p>
                 </div>
                 <div
                     onMouseEnter={showProfile}
                     onMouseLeave={hideProfile}
-                    className="header_item_right profile"
+                    className={styles.headerItemRightmost}
                 >
                     <p>Profile</p>
                     <div style={{ display: "none" }} id="profileContainer">
@@ -28,17 +29,12 @@ const RightSide = ({ userObj, setUserObj }) => {
                         />
                     </div>
                 </div>
-            </header>
-
-            <div className="container">
-                <div className="maincontent">
-                    <div className="title">
-                        <h4 id="maintitle">title</h4>
-                    </div>
-                    <div className="content">
-                        <AppRouter userObj={userObj} setUserObj={setUserObj} />
-                    </div>
-                </div>
+            </div>
+            <div className={styles.titleContainer}>
+                <h4 id="maintitle">title</h4>
+            </div>
+            <div className={styles.contentContainer}>
+                <AppRouter userObj={userObj} setUserObj={setUserObj} />
             </div>
         </div>
     );
