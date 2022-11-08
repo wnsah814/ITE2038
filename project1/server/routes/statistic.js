@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 학점 제일 짠 과목 추출 -- 2022년도
 router.post("/getOLAP", (req, res) => {
     const queryString =
         "with \

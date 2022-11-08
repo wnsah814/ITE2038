@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+//희망 삭제
 router.post("/deleteWanted", (req, res) => {
     const queryString = "delete from wanted where wanted_id >= 0;";
 
@@ -14,6 +15,7 @@ router.post("/deleteWanted", (req, res) => {
     });
 });
 
+//수강취소
 router.post("/deleteApplied", (req, res) => {
     const queryString = "delete from applied where applied_id >= 0;";
 

@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 조건 확인용
 router.post("/getMyClasses", (req, res) => {
     const queryString =
         "select * from class where lecturer_id=? and opened=2022";
@@ -43,6 +44,7 @@ router.post("/getClassSize", (req, res) => {
     );
 });
 
+// 증원하기
 router.post("/increaseOccupancy", (req, res) => {
     const queryString =
         "select (select count(*) from applied where class_id=?) as appliedAmount, (select person_max from class where class_id=?) as max_person, (select occupancy from room where room_id=(select room_id from class where class_id=?)) as occupancy;";

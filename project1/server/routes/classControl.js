@@ -74,6 +74,7 @@ router.post("/getRoomSize", (req, res) => {
     });
 });
 
+// 수업 추가하기
 router.post("/insertClass", (req, res) => {
     const queryString =
         "insert into class (class_no, course_id, major_id, year, lecturer_id, person_max, opened, room_id) values(?, ?, ?, ?, ?, ?, ?, ?);";
@@ -97,6 +98,8 @@ router.post("/insertClass", (req, res) => {
         }
     );
 });
+
+// 시간추가하기
 router.post("/insertTime", (req, res) => {
     const firstDay = req.body.firstDay;
     const firstStart = req.body.firstStart;
