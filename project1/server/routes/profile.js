@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 학생 데이터 가져오기
 router.post("/getStudentData", (req, res) => {
     const id = req.body.studentId;
     let queryString =
@@ -14,6 +15,7 @@ router.post("/getStudentData", (req, res) => {
     });
 });
 
+// 학생 비밀번호 변경
 router.post("/changeStudentPassword", (req, res) => {
     const id = req.body.studentId;
     const pw = req.body.password;
@@ -24,6 +26,7 @@ router.post("/changeStudentPassword", (req, res) => {
     });
 });
 
+// 관리자 데이터 가져오기
 router.post("/getStaffData", (req, res) => {
     const id = req.body.staffId;
     let queryString =
@@ -34,6 +37,7 @@ router.post("/getStaffData", (req, res) => {
     });
 });
 
+// 관리자 비밀번호 변경
 router.post("/changeStaffPassword", (req, res) => {
     const id = req.body.staffId;
     const pw = req.body.password;

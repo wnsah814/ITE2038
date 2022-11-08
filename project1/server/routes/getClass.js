@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 수업가져오기 (수강편람)
 router.post("/getClass", (req, res) => {
     const reqObj = {
         class_id: req.body.class_id,

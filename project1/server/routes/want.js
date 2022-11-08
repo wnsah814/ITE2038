@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 이미 희망과목에 담았는 지 확인
 router.post("/getDidWanted", (req, res) => {
     const queryString =
         "select count(*) as wanted from wanted where (student_id, class_id) = (?, ?);";
@@ -17,6 +18,7 @@ router.post("/getDidWanted", (req, res) => {
     );
 });
 
+// 희망과목에 추가
 router.post("/addWant", (req, res) => {
     const student_id = req.body.student_id;
     const class_id = req.body.class_id;
@@ -31,6 +33,7 @@ router.post("/addWant", (req, res) => {
     });
 });
 
+//희망 취소
 router.post("/cancelWant", (req, res) => {
     const student_id = req.body.student_id;
     const class_id = req.body.class_id;
@@ -44,6 +47,7 @@ router.post("/cancelWant", (req, res) => {
     });
 });
 
+// 희망과목 목록 가져오기
 router.post("/getwant", (req, res) => {
     const student_id = req.body.student_id;
 

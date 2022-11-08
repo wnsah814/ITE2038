@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+//로그인
 router.post("/login", (req, res) => {
     const id = req.body.userId;
     const pwd = req.body.userPassword;
