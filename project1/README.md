@@ -88,29 +88,62 @@ npm run start
 ![Untitled](README_ASSETS/Untitled%201.png)
 
 -   student
+    -   student_id: 학생의 학번
+    -   password: 학생 비밀번호
+    -   name: 학생 이름
+    -   sex: 학생 성별
+    -   year: 몇학년인지 알려준다.
+    -   major_id: 전공 아이디
+    -   lecturer_id: 지도교수 아이디
     -   status: 학생의 상태를 나타낸다. [0, 1, 2] ⇒ [”재학”, “휴학”, “졸업”] 에 대응된다.
 -   lecturer
+    -   lecturer_id: 교수 아이디
+    -   name: 교수 이름
+    -   sex: 교수 성별
+    -   major_id: 교수 전공 아이디
 -   staff
+    -   staff_id: 스태프 아이디
+    -   password: 비밀번호
+    -   name: 이름
+    -   sex: 성별
     -   level: 관리자 등급을 나타낸다. 현재 사용중인 값은 0과 1로, 0은 교수가 아닌 관리자, 1은 교수를 의미한다.
 -   applied
     -   수강신청 정보와 해당 학기의 성적을 담고 있다. 한 학기(이 시스템에서는 1년)이 끝나면 takes로 정보가 이동된다.
+    -   applied_id: 구분용 아이디
+    -   student_id: 신청한 학생 아이디
+    -   class_id: 학생이 신청한 수업 아이디
+    -   grade: 수업 성적
 -   wanted
     -   학생들의 수강신청 희망 정보를 가지고 있다.
     -   success는 수강 성공여부를 담고 있는 것으로 설계하였지만 사용하지는 않았다.
     -   수강신청 기간이 끝나면 이 테이블의 데이터들은 날려버린다.
+    -   wanted_id: 구분용
+    -   student_id: 학생 아이디
+    -   class_id: 수업 아이디
 -   takes
     -   학생들의 지난 모든 성적을 가지고 있다 (현재 학기 제외)
+    -   course_id: 과목 아이디
     -   year는 수강년도를 말한다.
     -   grade는 [4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5, 0.0] ⇒ [”A+”, “A0”, “B+”, “B0”, “C+”, “C0”, “D+”, “D0”, “P”, “F”]로 대응된다.
 -   major
+    -   전공 구분용
 -   class
+    -   수업 데이터 저장용
+    -   class_id: 행 구분용
+    -   class_no: 수업번호
+    -   course_id: 학수번호
+    -   opened: 개설 년도
+    -   person_max: 수업 정원
 -   course
+    -   과목 데이터 저장
+    -   credit: 학점
 -   time
     -   수업(class)에 대응하는 시간 정보를 가지고 있다.
     -   평일 18시 이후, 토요일은 E-러닝으로 구분된다.
     -   일요일은 수업이 없다.
     -   begin 이 “no” 인 것은 미지정 이라는 뜻이다.(없을 수록 좋다)
 -   building
+    -   건물 저장
 -   room
     -   주어진 테이블은 호수 구분이 따로 없는 것 같아서 room_no를 새로 추가하였다
     -   room_no가 몇호인지 알려준다
@@ -233,6 +266,7 @@ npm run start
     				REFERENCES class(class_id)
     				on delete cascade #class가 삭제되면 wanted도 삭제된다
     );
+
     ```
 
 -   SQL FILE
@@ -479,6 +513,10 @@ order by diff desc
 limit 10;
 ```
 
+# 사이트 구조
+
+![Untitled](README_ASSETS/Untitled%202.png)
+
 # 각 요구 사항에 대한 실행 결과
 
 ### 홈페이지 (공지)
@@ -487,11 +525,11 @@ limit 10;
 -   공지사항을 확인할 수 있고, 왼쪽의 사이트 메뉴를 통해 이동할 수 있다.
 -   오른쪽 위 “SIGN IN”을 통해 로그인 할 수 있다.
 
-![Untitled](README_ASSETS/Untitled%202.png)
+![Untitled](README_ASSETS/Untitled%203.png)
 
 ### 로그인
 
-![Untitled](README_ASSETS/Untitled%203.png)
+![Untitled](README_ASSETS/Untitled%204.png)
 
 -   학생 로그인
     -   학번(ID)와 비밀번호를 작성한 뒤 Enter 혹은 Sign In 버튼을 눌러 로그인을 진행할 수 있다.
@@ -502,7 +540,7 @@ limit 10;
 
 -   입력이 틀렸다는 알림창이 뜬다.
 
-![Untitled](README_ASSETS/Untitled%204.png)
+![Untitled](README_ASSETS/Untitled%205.png)
 
 **성공한 경우**
 
@@ -511,16 +549,16 @@ limit 10;
 -   학생인 경우 [수강신청, 희망수업, 신청내역, 내정보] 메뉴를 사용할 수 있다.
 -   관리자인 경우 [수업관리, 학생관리, 내정보] 메뉴를 사용할 수 있다.
 
-![Untitled](README_ASSETS/Untitled%205.png)
-
 ![Untitled](README_ASSETS/Untitled%206.png)
+
+![Untitled](README_ASSETS/Untitled%207.png)
 
 ### 로그아웃
 
 -   오른쪽 위 부분을 통해 로그아웃을 할 수 있다.
 -   마우스를 올리면 아래 “Sign Out”버튼이 생기는 데 이를 누르면 로그아웃이 진행된다.
 
-![Untitled](README_ASSETS/Untitled%207.png)
+![Untitled](README_ASSETS/Untitled%208.png)
 
 ### 수강편람
 
@@ -528,7 +566,7 @@ limit 10;
 -   검색 조건을 입력하지 않고 검색하면 해당 년도의 모든 과목이 출력된다.
 -   수업번호, 학수번호는 완전일치, 교과목명은 포함하는 결과를 출력한다
 
-![Untitled](README_ASSETS/Untitled%208.png)
+![Untitled](README_ASSETS/Untitled%209.png)
 
 ## 학생
 
@@ -536,15 +574,15 @@ limit 10;
 
 -   학생으로 로그인 시 수강신청 메뉴가 생기는 데 여기에는 수강편람 기능에 “신청”과 “희망” 버튼이 추가된다.
 -   신청 버튼 (+)을 눌러 수강신청을 할 수 있고, 희망 버튼 (하트) 을 눌러 희망과목에 추가할 수 있다.
-    ![Untitled](README_ASSETS/Untitled%209.png)
+    ![Untitled](README_ASSETS/Untitled%2010.png)
 
 **수강신청**
 
 -   성공
 
-![Untitled](README_ASSETS/Untitled%2010.png)
-
 ![Untitled](README_ASSETS/Untitled%2011.png)
+
+![Untitled](README_ASSETS/Untitled%2012.png)
 
 -   실패 (아래와 같은 사유들)
     -   재수강이 불가능 한 경우 (이전 성적이 B0 이상)
@@ -554,27 +592,27 @@ limit 10;
 
 **희망신청**
 
-![Untitled](README_ASSETS/Untitled%2012.png)
-
 ![Untitled](README_ASSETS/Untitled%2013.png)
-
-**희망취소**
 
 ![Untitled](README_ASSETS/Untitled%2014.png)
 
+**희망취소**
+
 ![Untitled](README_ASSETS/Untitled%2015.png)
+
+![Untitled](README_ASSETS/Untitled%2016.png)
 
 ### 희망수업
 
 -   희망신청한 과목들을 모아 볼 수 있다.
 
-![Untitled](README_ASSETS/Untitled%2016.png)
+![Untitled](README_ASSETS/Untitled%2017.png)
 
 ### 신청내역
 
 -   수강신청한 내용을 볼 수 있다.
 
-![Untitled](README_ASSETS/Untitled%2017.png)
+![Untitled](README_ASSETS/Untitled%2018.png)
 
 ### 내정보
 
@@ -584,9 +622,9 @@ limit 10;
     -   1교시(8:00 ~ 8:30) 부터 24교시까지 표현 가능하다.
     -   E-러닝 과목은 아래에 따로 표현된다.
 
-![Untitled](README_ASSETS/Untitled%2018.png)
-
 ![Untitled](README_ASSETS/Untitled%2019.png)
+
+![Untitled](README_ASSETS/Untitled%2020.png)
 
 ## 관리자(교수)
 
@@ -609,7 +647,7 @@ limit 10;
         -   수업을 삭제하면 그 수업을 수강신청 한 정보와 희망신청 정보도 같이 삭제된다.
         -   삭제하려는 수업의 시간 정보도 같이 삭제된다.
 
-![Untitled](README_ASSETS/Untitled%2020.png)
+![Untitled](README_ASSETS/Untitled%2021.png)
 
 ### 수업관리#2
 
@@ -619,18 +657,18 @@ limit 10;
     -   학생들의 수강 신청 기록(applied), 수강 희망 기록(wanted)를 초기화한다
     -   원래는 여기에 수강신청 기간 종료, 학기 종료 등의 기능을 구현하려 하였다.
 
-![Untitled](README_ASSETS/Untitled%2021.png)
+![Untitled](README_ASSETS/Untitled%2022.png)
 
 ### 학생 관리
 
 -   학생의 학번을 입력하면 그 학생의 정보를 조회 및 수정할 수 있다.
 -   또한 금학기 시간표, 성적 조회도 가능하다.
 
-![Untitled](README_ASSETS/Untitled%2022.png)
-
 ![Untitled](README_ASSETS/Untitled%2023.png)
 
 ![Untitled](README_ASSETS/Untitled%2024.png)
+
+![Untitled](README_ASSETS/Untitled%2025.png)
 
 ### 내정보
 
@@ -647,7 +685,7 @@ limit 10;
     -   수강신청 조건에서 정원 초과 조건만 제외하고,
     -   강의실의 수용 가능 인원 수 보다 작아야한다.
 
-![Untitled](README_ASSETS/Untitled%2025.png)
+![Untitled](README_ASSETS/Untitled%2026.png)
 
 # Detail
 
@@ -655,7 +693,7 @@ limit 10;
 
 -   로그인을 하지 않거나 유저→관리자 / 관리자 → 유저 메뉴를 접근하려고 하면 막는다.
 
-![Untitled](README_ASSETS/Untitled%2026.png)
+![Untitled](README_ASSETS/Untitled%2027.png)
 
 # Trouble Shooting
 
