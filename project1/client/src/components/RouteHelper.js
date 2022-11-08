@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./RouteHelper.module.css";
+
+// 주소로 접근하는 것 막기
 const RouteHelper = () => {
     const nav = useNavigate();
     const gotoLogin = () => {

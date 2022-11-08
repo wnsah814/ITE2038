@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styles from "routes/Common/Announce.module.css";
 
+// 공통 > 공지사항 (홈페이지)
 const Announce = ({ userObj, setUserObj }) => {
     useEffect(() => {
         const title = "공지사항";

@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import TimeData from "./TimeData";
 import TimeEData from "./TimeEData";
 import styles from "./TimeTable.module.css";
+
+// 수업시간표 component
 const TimeTable = ({ userObj, studentId }) => {
-    const [flag, setFlag] = useState(false);
-    const [timeTable, setTimeTable] = useState([]);
-    const [eLearning, setELearning] = useState([]);
-    const [classObj, setClassObj] = useState();
+    const [flag, setFlag] = useState(false); // 표시 할 지 여부 (수강중인 수업이 없다면 테이블 표시 안함)
+    const [timeTable, setTimeTable] = useState([]); // 시간표 데이터
+    const [eLearning, setELearning] = useState([]); // 이러닝 데이터
+    const [classObj, setClassObj] = useState(); // 수강중인 수업
+
     const addClassToTable = (timeArr, i, b, e) => {
         const begin = new Date(new Date(b).getTime() + 9 * 60 * 60 * 1000);
         const end = new Date(new Date(e).getTime() + 9 * 60 * 60 * 1000);
@@ -23,9 +26,7 @@ const TimeTable = ({ userObj, studentId }) => {
 
     const checkValid = (beginDate, idx) => {
         // beginDate와 courseIdx를 인자로 갖는 함수
-        // console.log(beginDate);
         if (beginDate === "NO") {
-            // 미지정 강좌
             console.log("미지정 강좌");
             return false;
         }
@@ -48,11 +49,10 @@ const TimeTable = ({ userObj, studentId }) => {
         return true;
     };
 
+    // 내 수강신청 정보를 바탕으로 시간표 데이터를 만든다.
     const makeTimeTable = (myAppliedClass) => {
         const myClass = myAppliedClass;
-        // console.log("timetable을 만듭니다");
         let timeArr = new Array(7).fill(0).map(() => new Array(0));
-        // console.log("inital timeArr: ", timeArr);
 
         for (let i = 0; i < myClass.length; ++i) {
             const v = myClass[i];
@@ -95,11 +95,11 @@ const TimeTable = ({ userObj, studentId }) => {
                 timetable[day].push([-1, 1]); //class_id, count
             }
         }
-
-        // console.log("수정된 timetable", timetable);
+        // 만든 시간표 데이터를 저장한다.
         setTimeTable(timetable);
     };
 
+    // 수강중인 수업을 가져온다.
     const getAppliedClass = async () => {
         let wonderId = userObj?.id;
         if (studentId !== undefined) {
@@ -134,30 +134,32 @@ const TimeTable = ({ userObj, studentId }) => {
         console.log("userObj 정보가 변경되었습니다", userObj);
         getAppliedClass();
     }, [userObj, studentId]);
-    const timeRange = [
-        "8:00",
-        "8:30",
-        "9:00",
-        "9:30",
-        "10:00",
-        "10:30",
-        "11:00",
-        "11:30",
-        "12:00",
-        "12:30",
-        "13:00",
-        "13:30",
-        "14:00",
-        "14:30",
-        "15:00",
-        "15:30",
-        "16:00",
-        "16:30",
-        "17:00",
-        "17:30",
-        "18:00",
-        "18:30",
-    ];
+
+    // 수업 교시 시간단위로
+    // const timeRange = [
+    //     "8:00",
+    //     "8:30",
+    //     "9:00",
+    //     "9:30",
+    //     "10:00",
+    //     "10:30",
+    //     "11:00",
+    //     "11:30",
+    //     "12:00",
+    //     "12:30",
+    //     "13:00",
+    //     "13:30",
+    //     "14:00",
+    //     "14:30",
+    //     "15:00",
+    //     "15:30",
+    //     "16:00",
+    //     "16:30",
+    //     "17:00",
+    //     "17:30",
+    //     "18:00",
+    //     "18:30",
+    // ];
     return (
         <>
             {flag ? (
@@ -172,7 +174,6 @@ const TimeTable = ({ userObj, studentId }) => {
                                 ].map((v, i) => (
                                     <div key={i} className={styles.oneBlock}>
                                         {v}교시
-                                        {/* <br />  */}
                                         {/* {timeRange[i]} ~ {timeRange[i + 1]} */}
                                     </div>
                                 ))}

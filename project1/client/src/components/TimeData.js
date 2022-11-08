@@ -1,6 +1,7 @@
 import styles from "./TimeData.module.css";
+
+// 시간표에서 하나의 수업 단위
 const TimeData = ({ index, flexAmount, classObj }) => {
-    // console.log(classObj);
     return (
         <div className={`timeTd flex${flexAmount}`}>
             {index === -1 ? (

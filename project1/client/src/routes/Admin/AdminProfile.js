@@ -2,15 +2,17 @@ import styles from "./AdminProfile.module.css";
 import { useEffect, useState } from "react";
 import profileImg from "assets/images/profile.png";
 import lionImg from "assets/images/hyu_lion.jpg";
-import TimeTable from "components/TimeTable";
 import axios from "axios";
 import MyClass from "components/Control/MyClass";
 import RouteHelper from "components/RouteHelper";
+
+// 관라자 > 프로필
 const AdminProfile = ({ userObj, setUserObj }) => {
     useEffect(() => {
         const title = "내 정보";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
+
     const [staffData, setStaffData] = useState({});
     useEffect(() => {
         const getStaffData = async () => {
@@ -27,6 +29,7 @@ const AdminProfile = ({ userObj, setUserObj }) => {
         getStaffData();
     }, [userObj]);
 
+    // 관리자 비밀번호 변경
     const changePassword = async () => {
         let presPwd = prompt("현재 비밀번호를 입력해주세요");
         if (presPwd === staffData.password) {
@@ -106,26 +109,17 @@ const AdminProfile = ({ userObj, setUserObj }) => {
                                                 <b>성별</b> {staffData.sex}
                                             </p>
                                             <p>
-                                                <b>전공</b>{" "}
-                                                {staffData.major_name}
+                                                {userObj.job ===
+                                                "admin" ? null : (
+                                                    <>
+                                                        <b>전공</b>{" "}
+                                                        {staffData.major_name}
+                                                    </>
+                                                )}
                                             </p>
                                         </div>
                                     </div>
-                                    <div className={styles.container}>
-                                        <div className={styles.cbody}>
-                                            <div className={styles.ctitle}>
-                                                <h5>지도교수</h5>
-                                            </div>
-                                            <p>
-                                                <b>이름</b>{" "}
-                                                {staffData.lecturer_name}
-                                            </p>
-                                            <p>
-                                                <b>학번</b>{" "}
-                                                {staffData.lecturer_id}
-                                            </p>
-                                        </div>
-                                    </div>
+
                                     <div className={styles.container}>
                                         <div className={styles.cbody}>
                                             <div className={styles.ctitle}>
@@ -138,6 +132,7 @@ const AdminProfile = ({ userObj, setUserObj }) => {
                                             <p>대충 어떤 내용</p>
                                         </div>
                                     </div>
+
                                     <div className={styles.container}>
                                         <div className={styles.cbody}>
                                             <div className={styles.ctitle}>

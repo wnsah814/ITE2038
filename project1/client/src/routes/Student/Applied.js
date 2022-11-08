@@ -4,16 +4,19 @@ import { useEffect, useState } from "react";
 import styles from "./Applied.module.css";
 import showTime from "assets/js/timeParse";
 import RouteHelper from "components/RouteHelper";
+
+// 학생 > 수강편람
 const Basket = ({ userObj, setUserObj }) => {
-    const [refresh, setRefresh] = useState(false);
-    const refreshData = () => {
-        setRefresh((prev) => !prev);
-    };
     useEffect(() => {
         const title = "신청내역";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
-
+    // 새로고침
+    const [refresh, setRefresh] = useState(false);
+    const refreshData = () => {
+        setRefresh((prev) => !prev);
+    };
+    // 테이블 구분자
     const ths = [
         "수강취소",
         "수업번호",
@@ -28,9 +31,10 @@ const Basket = ({ userObj, setUserObj }) => {
         "년도",
     ];
 
+    // 내가 신청한 과목
     const [myClass, setMyClass] = useState({});
     const [cnt, setCnt] = useState(0);
-
+    // 신청한 과목 가져오기
     const getAppliedClass = () => {
         console.log(userObj.id, "my id");
         axios

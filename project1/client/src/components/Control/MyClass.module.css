@@ -2,15 +2,12 @@
     width: 100%;
     background-color: white;
     border-radius: 0.5rem;
-    padding: 3rem;
-    margin-bottom: 1.5rem;
-}
-
-.title {
+    /* padding: 3rem; */
     margin-bottom: 1.5rem;
 }
 
 .content {
+    margin-top: 2rem;
 }
 
 .button {

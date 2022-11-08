@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// 관리자에게만 보여지는 부분,
 const NavAdmin = () => {
     return (
         <div className="nav_container">
@@ -7,10 +8,6 @@ const NavAdmin = () => {
             <ul>
                 <li className="nav_item">
                     <Link to="admin/classControl">수업 관리</Link>
-                    {/* <ul>
-                        <li>하위메뉴 1</li>
-                        <li>하위메뉴 2</li>
-                    </ul> */}
                 </li>
                 <li className="nav_item">
                     <Link to="admin/studentControl">학생 관리</Link>

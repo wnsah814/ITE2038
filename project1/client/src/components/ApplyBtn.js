@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// 수강신청 버튼
 const ApplyBtn = ({ vector, userObj, refreshData }) => {
+    // 내가 수강 신청한 목록
     const [applied, setApplied] = useState(false);
+    // 이미 수강신청 했는지 알아보기
     useEffect(() => {
         const getDidApplied = async () => {
             const res = await axios.post(
@@ -15,18 +18,17 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
             const data = res.data;
             console.log(data);
             if (data[0].applied === 1) {
-                // console.log("이미 신청함");
-                setApplied(true);
+                setApplied(true); // 이미 신청한 경우
             } else {
-                // console.log("신청안함");
-                setApplied(false);
+                setApplied(false); // 신청하지 않은 경우
             }
         };
         getDidApplied();
     }, [vector]);
 
+    // 수강신청 함수
     const apply = async () => {
-        // 재학생 (휴학생, 졸업생 신창 불가)
+        // 재학생 (휴학생, 졸업생 신창 불가) - 구현x
 
         // 재수강이 불가능 한 지 검사한다 (B0 이상일 경우 불가능)
         const applyCheck1 = await axios.post(
@@ -55,6 +57,7 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
             alert("최대 신청 가능학점을 초과하였습니다.");
             return;
         }
+
         // 시간이 겹치는 지
         const applyCheck4 = await axios.post(
             "http://localhost:4000/api/appC4",
@@ -71,6 +74,7 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
             alert("수업시간이 겹칩니다");
             return;
         }
+
         // 정원이 다 찼는 지 확인한다
         const applyCheck2 = await axios.post(
             "http://localhost:4000/api/appC2",
@@ -83,11 +87,12 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
             alert("정원이 다 찼습니다");
             return;
         }
+
+        // 모든 조건을 통과했다면 수강신청을 진행한다.
         const res = await axios.post("http://localhost:4000/api/apply", {
             student_id: userObj.id,
             class_id: vector.class_id,
         });
-
         const data = res.data;
         if (data) {
             alert("수강신청되었습니다");
@@ -98,6 +103,8 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
         }
         refreshData();
     };
+
+    // 수강취소 함수
     const cancelApply = async () => {
         const res = await axios.post("http://localhost:4000/api/cancelApply", {
             student_id: userObj.id,
@@ -106,10 +113,8 @@ const ApplyBtn = ({ vector, userObj, refreshData }) => {
         const data = res.data;
         if (data) {
             alert("수강취소");
-            console.log(data);
         } else {
             alert("수강취소 실패");
-            console.log("no data");
         }
         refreshData();
     };

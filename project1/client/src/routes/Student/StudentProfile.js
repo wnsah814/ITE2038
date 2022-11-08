@@ -5,11 +5,14 @@ import lionImg from "assets/images/hyu_lion.jpg";
 import TimeTable from "components/TimeTable";
 import axios from "axios";
 import RouteHelper from "components/RouteHelper";
+
+// 학생 > 내정보
 const StudentProfile = ({ userObj, setUserObj }) => {
     useEffect(() => {
         const title = "내 정보";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
+    // 학생 정보
     const [userData, setUserData] = useState({});
     useEffect(() => {
         const getStudentData = async () => {
@@ -26,6 +29,7 @@ const StudentProfile = ({ userObj, setUserObj }) => {
         getStudentData();
     }, [userObj]);
 
+    // 비밀번호 변경
     const changePassword = async () => {
         let presPwd = prompt("현재 비밀번호를 입력해주세요");
         if (presPwd === userData.password) {

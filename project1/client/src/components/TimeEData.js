@@ -1,4 +1,5 @@
 import styles from "./TimeEData.module.css";
+// E러닝 수업 단위
 const TimeEData = ({ index, classObj }) => {
     console.log(classObj);
     return (
