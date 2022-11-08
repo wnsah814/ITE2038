@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// 학생들에게만 보여지는 메누
 const NavStudent = () => {
     return (
         <div className="nav_container">

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Handbook.module.css";
 import showTime from "assets/js/timeParse";
+
+// 공통 > 수강편람
 const Handbook = () => {
     const hb_classID = useRef();
     const hb_courseID = useRef();
@@ -14,15 +16,21 @@ const Handbook = () => {
 
     const [cnt, setCnt] = useState(0);
     const [result, setResult] = useState({});
+
+    // 년도 설정
     const [yearSelected, setYearSelected] = useState(2022);
     const onYearChange = (e) => {
         setYearSelected(e.target.value);
     };
+
+    // 초기화
     const resetControl = () => {
         hb_classID.current.value = "";
         hb_courseID.current.value = "";
         hb_name.current.value = "";
     };
+
+    // 검색함수
     const searchClass = async () => {
         const res = await axios.post("http://localhost:4000/api/getClass", {
             class_id: hb_classID.current.value,
@@ -40,6 +48,8 @@ const Handbook = () => {
             setCnt(0);
         }
     };
+
+    // 테이블 구분자
     const ths = [
         "수업번호",
         "학수번호",

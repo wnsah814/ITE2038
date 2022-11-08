@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./MiniProfile.module.css";
 const MiniProfile = ({ userObj, setUserObj }) => {
+    // 네비게이터
     const navigate = useNavigate();
+
+    // 로그아웃
     const handleLogout = () => {
         console.log("handleLogout");
         window.sessionStorage.clear(); // 세션 삭제
@@ -14,6 +17,8 @@ const MiniProfile = ({ userObj, setUserObj }) => {
         });
         navigate("/");
     };
+
+    // 로그인 페이지 이동
     const gotoSign = () => {
         navigate("/signin");
     };
@@ -28,7 +33,6 @@ const MiniProfile = ({ userObj, setUserObj }) => {
                 </div>
             ) : (
                 <div>
-                    {/* <p>🔽🔽🔽</p> */}
                     <button className={styles.Btn} onClick={gotoSign}>
                         Sign In
                     </button>

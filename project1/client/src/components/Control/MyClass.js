@@ -40,7 +40,7 @@ const MyClass = ({ userObj }) => {
     };
 
     const increase = async () => {
-        if (classIdRef.current.value === undefined) {
+        if (classIdRef.current.value === "0") {
             alert("수업을 먼저 선택해주세요");
             return;
         }
@@ -52,13 +52,20 @@ const MyClass = ({ userObj }) => {
                 classId: classIdRef.current.value,
             }
         );
+
         const data = res.data;
-        alert(data.msg);
+        if (data?.status === "no") {
+            alert(data?.msg);
+        }
         console.log(data);
     };
 
     // 수강 허용
     const allowClass = async () => {
+        if (classIdRef.current.value === "0") {
+            alert("수업을 먼저 선택해주세요");
+            return;
+        }
         // 강의실 최대 수 확인해주기
         const sizeCheck = await axios.post(
             "http://localhost:4000/api/getClassSize",
@@ -133,18 +140,25 @@ const MyClass = ({ userObj }) => {
     };
     return (
         <div className={styles.container}>
-            <div className={styles.title}>
-                <h2>내 수업 관리</h2>
-            </div>
-            <div className={styles.content}>
-                <select className={styles.input} ref={classIdRef}>
-                    <option disabled>2022년 수업만 선택 가능합니다.</option>
-                    {myClass?.map((v, i) => (
-                        <option key={i} value={v.class_id}>
-                            {v.course_id}-{v.class_id}
+            <div>
+                <div className={styles.content}>
+                    <span>내 수업 선택 </span>
+                    <select className={styles.input} ref={classIdRef}>
+                        <option value="0">
+                            2022년 수업만 선택 가능합니다.
                         </option>
-                    ))}
-                </select>
+                        {myClass?.map((v, i) => (
+                            <option key={i} value={v.class_id}>
+                                {v.course_id}-{v.class_id}
+                            </option>
+                        ))}
+                    </select>
+                    <button onClick={searchMyClass} className={styles.button}>
+                        조회하기
+                    </button>
+                </div>
+                <br />
+                <hr />
 
                 {/* <select className={styles.input} ref={yearRef}>
                     <option disabled>년도 선택</option>
@@ -154,36 +168,32 @@ const MyClass = ({ userObj }) => {
                         </option>
                     ))}
                 </select> */}
-                <button onClick={searchMyClass} className={styles.button}>
-                    조회하기
-                </button>
-                <h2>수업 증원하기</h2>
-                <input
-                    ref={sizeRef}
-                    className={styles.input}
-                    type="number"
-                    placeholder="최대 학생 수"
-                />
+                <div className={styles.content}>
+                    <h2>수업 증원하기</h2>
+                    <input
+                        ref={sizeRef}
+                        className={styles.input}
+                        type="number"
+                        placeholder="최대 학생 수"
+                    />
 
-                <button className={styles.button} onClick={increase}>
-                    반영
-                </button>
-                <p>현재 신청한 학생 수 보다 커야함 (+값이 달라졌는지?)</p>
-                <p>강의실 최대 수용 인원</p>
+                    <button className={styles.button} onClick={increase}>
+                        반영
+                    </button>
+                </div>
 
-                <h2>수강허용</h2>
-                <input
-                    ref={sidRef}
-                    className={styles.input}
-                    type="number"
-                    placeholder="학생 학번"
-                />
-                <button onClick={allowClass} className={styles.button}>
-                    반영
-                </button>
-
-                <p>수강 조건 검사하기(인원수제외)</p>
-                <p>강의실 최대 수용 인원</p>
+                <div className={styles.content}>
+                    <h2>수강허용</h2>
+                    <input
+                        ref={sidRef}
+                        className={styles.input}
+                        type="number"
+                        placeholder="학생 학번"
+                    />
+                    <button onClick={allowClass} className={styles.button}>
+                        반영
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -6,16 +6,18 @@ import styles from "./Basket.module.css";
 import showTime from "assets/js/timeParse";
 import RouteHelper from "components/RouteHelper";
 
+// 학생 > 희망과목
 const Basket = ({ userObj, setUserObj }) => {
-    const [refresh, setRefresh] = useState(false);
-    const refreshData = () => {
-        setRefresh((prev) => !prev);
-    };
     useEffect(() => {
         const title = "희망수업";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
-
+    // 새로고침
+    const [refresh, setRefresh] = useState(false);
+    const refreshData = () => {
+        setRefresh((prev) => !prev);
+    };
+    // 테이블 구분자
     const ths = [
         "신청",
         "희망",
@@ -29,10 +31,10 @@ const Basket = ({ userObj, setUserObj }) => {
         "강의실",
         "년도",
     ];
-
+    // 내 희망과목
     const [myClass, setMyClass] = useState({});
     const [cnt, setCnt] = useState(0);
-
+    // 내 희망과목 가져오기
     const getWantedClass = async () => {
         console.log(userObj.id, "my id");
         const res = await axios.post("http://localhost:4000/api/getwant", {

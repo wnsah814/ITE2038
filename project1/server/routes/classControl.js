@@ -104,6 +104,8 @@ router.post("/insertTime", (req, res) => {
     const secondDay = req.body.secondDay;
     const secondStart = req.body.secondStart;
     const secondEnd = req.body.secondEnd;
+
+    let secondSkip = false;
     console.log(
         firstDay,
         firstStart,
@@ -136,7 +138,9 @@ router.post("/insertTime", (req, res) => {
         }
         console.log(firstB, firstE);
     }
-    if (secondDay === "6") {
+    if (secondDay === "7") {
+        secondSkip = true;
+    } else if (secondDay === "6") {
         secondB = new Date("1900-01-06T05:30:00.000Z");
         secondE = new Date("1900-01-06T06:30:00.000Z");
         console.log("원격");
@@ -159,19 +163,40 @@ router.post("/insertTime", (req, res) => {
         }
         console.log(secondB, secondE);
     }
-    // showTime(firstB, firstE, secondB, secondE);
-    const queryString =
-        "insert into time(class_id, period, begin, end) values(?,1,?,?), (?,2,?,?)";
 
-    connection.query(
-        queryString,
-        [req.body.classId, firstB, firstE, req.body.classId, secondB, secondE],
-        (err, rows) => {
-            if (err) throw err;
-            console.log(rows);
-            res.send(rows);
-        }
-    );
+    let queryString = "";
+    if (secondSkip) {
+        queryString =
+            "insert into time(class_id, period, begin, end) values(?,1,?,?)";
+        connection.query(
+            queryString,
+            [req.body.classId, firstB, firstE],
+            (err, rows) => {
+                if (err) throw err;
+                console.log(rows);
+                res.send(rows);
+            }
+        );
+    } else {
+        queryString =
+            "insert into time(class_id, period, begin, end) values(?,1,?,?), (?,2,?,?)";
+        connection.query(
+            queryString,
+            [
+                req.body.classId,
+                firstB,
+                firstE,
+                req.body.classId,
+                secondB,
+                secondE,
+            ],
+            (err, rows) => {
+                if (err) throw err;
+                console.log(rows);
+                res.send(rows);
+            }
+        );
+    }
 });
 
 // 과목 수정

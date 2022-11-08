@@ -3,13 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 
+// 로그인 화면
 const SignIn = ({ setUserObj }) => {
     useEffect(() => {
         const title = "로그인";
         document.querySelector("#maintitle").innerHTML = title;
     }, []);
+
+    // REF
     const idRef = useRef();
     const pwdRef = useRef();
+
+    // 관리자 로그인
     const [checked, toggleCheck] = useState(false);
     const toggleChk = () => {
         toggleCheck((prev) => !prev);
@@ -17,10 +22,12 @@ const SignIn = ({ setUserObj }) => {
 
     const navigate = useNavigate();
 
+    // 로그인 함수
     const handleSignIn = async (e) => {
         e.preventDefault();
         const uid = idRef.current.value;
         const upw = pwdRef.current.value;
+        // 예외처리
         if (uid === "" || uid === undefined) {
             alert("Pleast enter your ID");
             idRef.current.focus();
@@ -31,32 +38,26 @@ const SignIn = ({ setUserObj }) => {
             pwdRef.current.focus();
             return false;
         }
-        axios
-            .post("http://localhost:4000/api/login", {
-                userId: uid,
-                userPassword: upw,
-                isAdmin: checked,
-            })
-            .then((res) => {
-                // console.log(res);
-                // console.log(res.data);
-                if (res.data.job !== "none") {
-                    window.sessionStorage.setItem("job", res.data.job);
-                    window.sessionStorage.setItem("id", idRef.current.value);
-                    window.sessionStorage.setItem("name", res.data.name);
-                    window.sessionStorage.setItem("sex", res.data.sex);
-                    // 세션스토리지에 key : id , value : idRef.current.value로 저장
-                    // sessionsStorage는 창 닫으면 사라짐, localStorage는 안사라짐
-                    setUserObj(res.data);
-                    navigate("/");
-                } else {
-                    alert("Wrong ID or password");
-                    // idRef.current.value = "";
-                    // pwdRef.current.value = "";
-                    navigate("/signin");
-                }
-            })
-            .catch((e) => console.log(e));
+        // 로그인 하기
+        const res = await axios.post("http://localhost:4000/api/login", {
+            userId: uid,
+            userPassword: upw,
+            isAdmin: checked,
+        });
+        const data = res.data;
+        if (data.job !== "none") {
+            // 로그인 성공
+            window.sessionStorage.setItem("job", res.data.job);
+            window.sessionStorage.setItem("id", idRef.current.value);
+            window.sessionStorage.setItem("name", res.data.name);
+            window.sessionStorage.setItem("sex", res.data.sex);
+            setUserObj(res.data);
+            navigate("/");
+        } else {
+            // 로그인 실패
+            alert("Wrong ID or password");
+            navigate("/signin");
+        }
     };
 
     return (

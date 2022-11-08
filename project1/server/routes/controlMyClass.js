@@ -62,10 +62,17 @@ router.post("/increaseOccupancy", (req, res) => {
                     msg: `강의실 수용 가능 인원 수 ${rows[0].occupancy}보다 큰 수를 입력하셨습니다.`,
                 });
             } else {
-                res.send({
-                    status: "ok",
-                    msg: "수강 가능 인원 수를 조정하였습니다.",
-                });
+                connection.query(
+                    "update class set person_max=? where class_id=?;",
+                    [newSize, req.body.classId],
+                    (error, result) => {
+                        res.send(result);
+                    }
+                );
+                // res.send({
+                //     status: "ok",
+                //     msg: "수강 가능 인원 수를 조정하였습니다.",
+                // });
             }
         }
     );

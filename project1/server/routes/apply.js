@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
+// 재수강 가능 여부
 router.post("/appC1", (req, res) => {
     const queryString =
         "select count(*) cnt from takes where student_id=? and grade >= 3.0 and course_id=?";
@@ -21,6 +22,7 @@ router.post("/appC1", (req, res) => {
     );
 });
 
+// 정원 다 찼는지 확인
 router.post("/appC2", (req, res) => {
     const queryString =
         "select person_max, (select count(*) from applied where class_id=?) as cnt \
@@ -39,6 +41,7 @@ router.post("/appC2", (req, res) => {
     );
 });
 
+// 18학점 이상 신청중인지
 router.post("/appC3", (req, res) => {
     const queryString =
         "select sum(credit) as sum from applied natural join class natural join course where student_id=?;";
@@ -56,26 +59,7 @@ router.post("/appC3", (req, res) => {
     });
 });
 
-// const showTime = (timeArr, start1, end1, start2, end2) => {
-//     getOneDay(timeArr, start1, end1);
-//     getOneDay(timeArr, start2, end2);
-//     // let time = "";
-//     // if (start1 === null || start1 === undefined || start1 === "") {
-//     //     time = "정보없음";
-//     //     // return time;
-//     // } else if (start1 === "NO") {
-//     //     time = "E-러닝";
-//     //     // return time;
-//     // } else {
-//     //     // time += showOneTime(start1, end1);
-//     // }
-//     // if (start2) {
-//     //     // time += "\n";
-//     //     // time += showOneTime(start2, end2);
-//     // }
-//     // // return time;
-// };
-
+/* 시간 만드는 함수 */
 const setOneDay = (timeArr, startDate, endDate) => {
     let start = getIndex(startDate);
     let end = getIndex(endDate);
@@ -102,6 +86,8 @@ const getIndex = (time) => {
     return [day, index];
 };
 
+// 시간 겹치는 지 확인
+// 부분함수-겹치는 지 확인해준다
 const checkDate = (timeArr, beginDate, endDate) => {
     let begin = getIndex(beginDate);
     let end = getIndex(endDate);
@@ -113,7 +99,6 @@ const checkDate = (timeArr, beginDate, endDate) => {
     }
     return flag;
 };
-
 router.post("/appC4", (req, res) => {
     console.log(req.body.begin1);
     const queryString =
@@ -132,10 +117,10 @@ router.post("/appC4", (req, res) => {
         } else {
             res.send({ status: "no" });
         }
-        // res.send({ status: "no" });
     });
 });
 
+// 이미 신청했는지
 router.post("/getDidApplied", (req, res) => {
     const queryString =
         "select count(*) as applied from applied where (student_id, class_id) = (?, ?);";
@@ -148,10 +133,9 @@ router.post("/getDidApplied", (req, res) => {
     );
 });
 
+// 신청한 정보
 router.post("/getApplied", (req, res) => {
     const student_id = req.body.student_id;
-
-    // console.log(">>>", student_id);
 
     const queryString =
         "with \
@@ -195,6 +179,7 @@ router.post("/getApplied", (req, res) => {
     });
 });
 
+// 수강신청
 router.post("/apply", (req, res) => {
     const student_id = req.body.student_id;
     const class_id = req.body.class_id;
@@ -210,6 +195,7 @@ router.post("/apply", (req, res) => {
     });
 });
 
+// 수강취소
 router.post("/cancelApply", (req, res) => {
     const student_id = req.body.student_id;
     const class_id = req.body.class_id;

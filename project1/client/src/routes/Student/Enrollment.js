@@ -6,6 +6,7 @@ import styles from "./Enrollment.module.css";
 import showTime from "assets/js/timeParse";
 import RouteHelper from "components/RouteHelper";
 
+// 학생 > 수강신청
 const Handbook = ({ userObj }) => {
     const [refresh, setRefresh] = useState(false);
     const refreshData = () => {

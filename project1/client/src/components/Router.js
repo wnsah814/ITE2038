@@ -11,10 +11,12 @@ import AdminProfile from "routes/Admin/AdminProfile";
 import ClassControl from "routes/Admin/ClassControl";
 import StudentControl from "routes/Admin/StudentControl";
 
+// 라우터, 주소를 비교해 적절한 사이트로 이동시킨다.
 const AppRouter = ({ userObj, setUserObj }) => {
     return (
         <>
             <Routes>
+                {/* Common */}
                 <Route path="/" element={<Announce />}></Route>
                 <Route path="/announce" element={<Announce />}></Route>
                 <Route
@@ -25,10 +27,24 @@ const AppRouter = ({ userObj, setUserObj }) => {
                     path="/handbook"
                     element={<Handbook userObj={userObj} />}
                 ></Route>
+
                 {/* Student */}
                 <Route
                     path="/student/enrollment"
                     element={<Enrollment userObj={userObj} />}
+                ></Route>
+
+                <Route
+                    path="/student/basket"
+                    element={
+                        <Basket userObj={userObj} setUserObj={setUserObj} />
+                    }
+                ></Route>
+                <Route
+                    path="/student/applied"
+                    element={
+                        <Applied userObj={userObj} setUserObj={setUserObj} />
+                    }
                 ></Route>
                 <Route
                     path="/student/profile"
@@ -40,22 +56,7 @@ const AppRouter = ({ userObj, setUserObj }) => {
                     }
                 ></Route>
 
-                <Route
-                    path="/student/basket"
-                    element={
-                        <Basket userObj={userObj} setUserObj={setUserObj} />
-                    }
-                ></Route>
-
-                <Route
-                    path="/student/applied"
-                    element={
-                        <Applied userObj={userObj} setUserObj={setUserObj} />
-                    }
-                ></Route>
-
                 {/* Admin */}
-
                 <Route
                     path="/admin/classControl"
                     element={

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// 모든 사용자에게 보여지는 부분
 const NavCommon = () => {
     return (
         <div className="nav_container">

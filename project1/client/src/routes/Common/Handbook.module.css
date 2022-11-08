@@ -36,56 +36,14 @@
     background-color: white;
     overflow-y: scroll;
     height: calc(100vh - 17rem);
-    /* overflow-x: auto; */
 }
 
-/* .table {
-    display: table;
-    text-indent: initial;
-    border-spacing: 2px;
-    width: 100%;
-    border-color: #e9ebec;
-}
-
-.thead {
-    color: white;
-    display: table-header-group;
-    top: 0;
-    background-color: #7db928;
-    position: sticky;
-}
-
-.tr {
-    display: table-row;
-    vertical-align: inherit;
-}
-
-.th {
-    display: table-cell;
-    vertical-align: inherit;
-    height: 2.5rem;
-}
-
-.tbody {
-    display: table-row-group;
-}
-
-.td {
-    display: table-cell;
-    vertical-align: inherit;
-    text-align: center;
-    height: 2rem;
-    white-space: pre;
-}
-
-.tbody .tr:hover {
-    background-color: rgb(243, 246, 249);
-} */
 .table {
     width: 100%;
 }
 
 .thead {
+    top: 0;
     position: sticky;
     background-color: #7db928;
     width: 100%;

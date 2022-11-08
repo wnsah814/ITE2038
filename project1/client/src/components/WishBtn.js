@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// 수강 희망 버튼
 const WishBtn = ({ vector, userObj, refreshData }) => {
+    // 이 수업을 희망하고 있는 지 여부
     const [wished, setWished] = useState(false);
     useEffect(() => {
         const getDidApplied = async () => {
@@ -15,15 +17,15 @@ const WishBtn = ({ vector, userObj, refreshData }) => {
             const data = res.data;
             console.log(data);
             if (data[0].wanted === 1) {
-                // console.log("이미 신청함");
-                setWished(true);
+                setWished(true); // 이미 신청함
             } else {
-                // console.log("신청안함");
-                setWished(false);
+                setWished(false); // 신청안함
             }
         };
         getDidApplied();
     }, [vector]);
+
+    // 수강 희망에 추가기
     const addWish = async () => {
         const res = await axios.post("http://localhost:4000/api/addWant", {
             student_id: userObj.id,
@@ -39,6 +41,8 @@ const WishBtn = ({ vector, userObj, refreshData }) => {
         }
         refreshData();
     };
+
+    // 수강 희망 취소
     const cancelWish = async () => {
         const res = await axios.post("http://localhost:4000/api/cancelWant", {
             student_id: userObj.id,

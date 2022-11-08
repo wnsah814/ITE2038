@@ -23,8 +23,6 @@ router.post("/login", (req, res) => {
             name: "none",
             sex: "none",
         };
-        // console.log(rows[0]);
-        // console.log(rows[0].sex);
 
         if (rows[0] !== undefined) {
             if (isAdmin) {
@@ -41,7 +39,6 @@ router.post("/login", (req, res) => {
             userObj.name = rows[0].name;
             userObj.sex = rows[0].sex;
         }
-        // console.log(userObj);
         res.send(userObj);
     });
 });
