@@ -14,14 +14,14 @@ const RightSide = ({ userObj, setUserObj }) => {
         <div className={styles.wrapper}>
             <div className={styles.headerContainer}>
                 <div className={styles.headerItem}>
-                    <p>무엇을 넣을까요</p>
+                    <p>2022년 서울캠퍼스 수강신청</p>
                 </div>
                 <div
                     onMouseEnter={showProfile}
                     onMouseLeave={hideProfile}
                     className={styles.headerItemRightmost}
                 >
-                    <p>Profile</p>
+                    <p>{userObj.name === "none" ? "SIGN IN" : userObj.name}</p>
                     <div style={{ display: "none" }} id="profileContainer">
                         <MiniProfile
                             userObj={userObj}

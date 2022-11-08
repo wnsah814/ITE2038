@@ -1,15 +1,21 @@
 .container {
     z-index: 99999;
-    color: white;
+    color: black;
     position: fixed;
-    right: 2.5rem;
+    top: 4rem;
+    right: 0;
+    /* right: 2.5rem; */
     padding: 1.5rem;
-    width: 15rem;
-    height: 7rem;
-    background-color: #898c8e;
-    border-radius: 0.25rem;
+    width: 8rem;
+    min-height: 2rem;
+    background-color: rgba(146, 212, 46, 0.637);
+    /* border-radius: 0.25rem; */
 }
 
 .Btn {
+    margin-top: 1rem;
+    background-color: aliceblue;
+    border-radius: 0.5rem;
+    border: none;
     padding: 0.5rem;
 }
