@@ -21,14 +21,14 @@ const MiniProfile = ({ userObj, setUserObj }) => {
         <div className={styles.container}>
             {userObj.job !== "none" ? (
                 <div>
-                    <h3>Student Profile</h3>
+                    <p>{userObj.id}</p>
                     <button className={styles.Btn} onClick={handleLogout}>
-                        Log out
+                        Sign Out
                     </button>
                 </div>
             ) : (
                 <div>
-                    <h3>SignIn</h3>
+                    {/* <p>🔽🔽🔽</p> */}
                     <button className={styles.Btn} onClick={gotoSign}>
                         Sign In
                     </button>

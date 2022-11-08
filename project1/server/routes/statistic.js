@@ -4,58 +4,31 @@ const mysql = require("mysql");
 const dbconfig = require("../config/dbconfig.js");
 const connection = mysql.createConnection(dbconfig);
 
-router.post("/getTakeData", async (req, res) => {
-    let student_ids = new Array();
-    const stuArr = [];
-    const result = connection.query(
-        "select distinct student_id from takes where year=2022",
-        (err, result) => {
-            if (err) throw err;
-            console.log(result.length);
-            for (let i = 0; i < result.length; ++i) {
-                student_ids.push(result[i].student_id);
-            }
-
-            student_ids.forEach((stu_id) => {
-                const studentObj = {
-                    stu_id,
-                    classes: [],
-                };
-                connection.query(
-                    "select * from takes natural join course where year=2022 and student_id=?",
-                    [stu_id],
-                    (error, rows) => {
-                        console.log(stu_id, "정보");
-                        let totalCredit = 0;
-                        let totalGrade = 0;
-                        for (let j = 0; j < rows.length; ++j) {
-                            let credit = rows[j].credit;
-                            let grade = rows[j].grade;
-                            totalCredit += credit;
-                            totalGrade += credit * grade;
-                            studentObj.classes.push([
-                                rows.class_id,
-                                credit,
-                                grade,
-                            ]);
-                        }
-                        studentObj.averageGrade = totalGrade / totalCredit;
-                        stuArr.push(studentObj);
-                    }
-                );
-            });
-        }
-    );
-    res.send(stuArr);
-});
-
-router.post("/getClassData", (req, res) => {
-    const queryString = "select * from class";
-
+router.post("/getOLAP", (req, res) => {
+    const queryString =
+        "with \
+    take_with_name as ( \
+        select * \
+        from takes \
+        natural join course \
+    ), \
+    std_avg(student_id, avg_credit) as ( \
+        select student_id, sum(grade * credit) / sum(credit) \
+        from take_with_name where grade != 0.5 and year=2022 group by student_id \
+    ) \
+    select T.course_id, C.name as course_name , count(*) as count, avg(avg_credit - grade) as diff \
+    from takes as T \
+    join std_avg AS SA \
+    on T.student_id=SA.student_id \
+    join course as C \
+    on T.course_id= C.course_id \
+    where year=2022 \
+    group by course_id \
+    order by diff desc \
+    limit 10;";
     connection.query(queryString, (err, rows) => {
         if (err) throw err;
         res.send(rows);
     });
 });
-
 module.exports = router;

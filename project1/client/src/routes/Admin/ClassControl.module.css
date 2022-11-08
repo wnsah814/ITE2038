@@ -10,12 +10,30 @@
     height: 100%;
 }
 
+.containers {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.conatinersTitle {
+    /* background-color: white; */
+    font-size: 1.2rem;
+    font-weight: 800;
+    /* padding: 1rem; */
+    /* border-radius: 0.5rem; */
+    /* width: 12rem; */
+    margin-bottom: 0.5rem;
+    padding-left: 0.2rem;
+}
+
 .container {
-    width: 100%;
+    flex: 1;
+    margin-right: 0.5rem;
     background-color: white;
     border-radius: 0.5rem;
     padding: 3rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .title {
@@ -36,8 +54,4 @@
 .input {
     padding: 1rem;
     margin-right: 0.1rem;
-}
-
-.olap {
-    background-color: #a194c5;
 }

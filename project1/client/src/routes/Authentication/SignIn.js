@@ -38,8 +38,8 @@ const SignIn = ({ setUserObj }) => {
                 isAdmin: checked,
             })
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 if (res.data.job !== "none") {
                     window.sessionStorage.setItem("job", res.data.job);
                     window.sessionStorage.setItem("id", idRef.current.value);

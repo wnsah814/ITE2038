@@ -1,5 +1,117 @@
 .wrapper {
     width: 100%;
+    height: calc(100vh - 7rem);
+    overflow-y: scroll;
+}
+
+.background {
+    width: 100%;
+    height: 15rem;
+    opacity: 0.9;
+    background: linear-gradient(to top, #171e32, #405189);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-15rem);
     height: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row > * {
+    padding: 0.75rem;
+}
+
+.top {
+    z-index: 9999;
+    height: 12rem;
+    padding: 1rem;
+}
+
+.lionImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+}
+
+.bottom {
+    height: 100%;
+    /* flex: 1 0 auto; */
+}
+
+.profileImg {
     padding: 0.5rem;
+    background-color: #f3f3f9;
+    border: 1px solid #e9ebec;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+}
+
+.shortProfile {
+    color: white;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.base {
+    color: white;
+}
+
+.editProfile {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.editBtn {
+    padding: 1rem;
+}
+
+.container {
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    word-wrap: break-word;
+    background-color: white;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 2px rgb(56, 65 74 / 15%);
+}
+
+.left {
+    width: 25%;
+    flex: 0 0 auto;
+}
+
+.right {
+    width: 75%;
+    height: 100%;
+    flex: 0 0 auto;
+}
+
+.cbody {
+    flex: 1 1 auto;
+    padding: 1rem;
+    height: 100%;
+}
+
+.ctitle {
+    margin-bottom: 1rem;
+}
+.timetable {
+    height: 100%;
 }

@@ -28,7 +28,11 @@ router.post("/login", (req, res) => {
 
         if (rows[0] !== undefined) {
             if (isAdmin) {
-                userObj.job = "admin";
+                if (rows[0].level === 0) {
+                    userObj.job = "admin";
+                } else {
+                    userObj.job = "lecturer";
+                }
                 userObj.id = rows[0].staff_id;
             } else {
                 userObj.job = "student";
