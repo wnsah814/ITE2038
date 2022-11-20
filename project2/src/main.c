@@ -1,6 +1,6 @@
 #include "bpt.h"
 
-int main(){
+int main() {
     int64_t input;
     char instruction;
     char buf[120];
@@ -17,10 +17,11 @@ int main(){
                 result = db_find(input);
                 if (result) {
                     printf("Key: %ld, Value: %s\n", input, result);
+                    // char* free 해줘야 할 것 같은데
+                    free(result);    
                 }
                 else
                     printf("Not Exists\n");
-
                 fflush(stdout);
                 break;
             case 'd':

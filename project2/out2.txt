@@ -1,0 +1,184 @@
+New File created
+new file is made
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 2 is complete 2, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 3 is complete 3, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 4 is complete 4, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 5 is complete 5, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 6 is complete 6, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 7 is complete 7, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 8 is complete 8, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 9 is complete 9, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 10 is complete 10, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 11 is complete 11, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 12 is complete 12, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 13 is complete 13, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 14 is complete 14, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 15 is complete 15, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 16 is complete 16, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 17 is complete 17, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 18 is complete 18, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 19 is complete 19, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 20 is complete 20, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 21 is complete 21, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 22 is complete 22, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 23 is complete 23, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 24 is complete 24, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 25 is complete 25, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 26 is complete 26, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 27 is complete 27, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 28 is complete 28, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 29 is complete 29, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 30 is complete 30, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+insertion 31 is complete 31, 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+[Find Leaf] left = 0, key = 1, right = 49, is_leaf = 1, now_root = 4096
+
+8192 is new_leaf offset
+
+split_leaf is complete
+key = 17, old = 4096, new = 8192, nok = 1, nr = 12288
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+insertion 33 is complete 17, 8192
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+insertion 34 is complete 18, 8192
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+insertion 35 is complete 19, 8192
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+insertion 36 is complete 20, 8192
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 1, Value: 1
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 2, Value: 2
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 3, Value: 3
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 4, Value: 4
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 5, Value: 5
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 6, Value: 6
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 7, Value: 7
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 8, Value: 8
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 9, Value: 9
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 10, Value: 10
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 11, Value: 11
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 12, Value: 12
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 13, Value: 13
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 14, Value: 14
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 15, Value: 15
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 16, Value: 16
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 17, Value: 17
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 18, Value: 18
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 19, Value: 19
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 20, Value: 20
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 21, Value: 21
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 22, Value: 22
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 23, Value: 23
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 24, Value: 24
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 25, Value: 25
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 26, Value: 26
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 27, Value: 27
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 28, Value: 28
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 29, Value: 29
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 30, Value: 30
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 31, Value: 31
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 32, Value: 32
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 33, Value: 33
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 34, Value: 34
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 35, Value: 35
+[Find Leaf] left = 4096, key = 17, right = 8192, is_leaf = 0, now_root = 12288
+Key: 36, Value: 36
+
