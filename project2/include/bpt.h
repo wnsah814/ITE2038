@@ -17,40 +17,44 @@
 
 /*
 
-page (leaf)
+page
 *-------------------*
 |record|record|     |
 *-------------------*
 
 */
 typedef struct record{
-    int64_t key; //8B
-    char value[120]; //120B
-}record;
+    int64_t key; 
+    char value[120];
+} record;
 
 typedef struct inter_record {
-    int64_t key; //8B
-    off_t p_offset; //8B
-}I_R;
+    int64_t key;
+    off_t p_offset; //page offset ?
+} I_R;
 
+/// @brief HEADER(128B) + 3968B
 typedef struct Page{
     off_t parent_page_offset;
     int is_leaf;
     int num_of_keys;
     char reserved[104];
-    off_t next_offset;
+    //leaf: right silbing
+    //internal: interpret key ranges (less than K1)
+    off_t next_offset; 
     union{
         I_R b_f[248];
         record records[31];
     };
-}page;
+} page;
 
+//contains metadata
 typedef struct Header_Page{
-    off_t fpo; // parent(page) offset
-    off_t rpo;
+    off_t fpo; // free page offset: position of the first free page
+    off_t rpo; // root page offset 
     int64_t num_of_pages;
     char reserved[4072];
-}H_P;
+} H_P;
 
 
 extern int fd;
@@ -69,7 +73,7 @@ off_t find_leaf(int64_t key);
 char * db_find(int64_t key);
 void freetouse(off_t fpo);
 int cut(int length);
-int parser();
+// int parser();
 
 void start_new_file(record rec);
 int db_insert(int64_t key, char * value);
