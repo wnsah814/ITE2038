@@ -17,7 +17,7 @@ TARGET_OBJ:=$(SRCDIR)main.o
 SRCS_FOR_LIB:=$(SRCDIR)bpt.c
 OBJS_FOR_LIB:=$(SRCS_FOR_LIB:.c=.o)
 
-CFLAGS+= -g -fPIC -I $(INC)
+CFLAGS+= -pg -fPIC -I $(INC)
 
 TARGET=main
 
@@ -28,13 +28,10 @@ $(TARGET): $(TARGET_OBJ)
 	make static_library
 	$(CC) $(CFLAGS) -o $@ $^ -L $(LIBS) -lbpt
 
-test: test.c
-	$(CC) test.c -o test
-
 clean:
 	rm $(TARGET) $(TARGET_OBJ) $(OBJS_FOR_LIB) $(LIBS)*
 	rm test.db
-	
+
 library:
 	gcc -shared -Wl,-soname,libbpt.so -o $(LIBS)libbpt.so $(OBJS_FOR_LIB)
 

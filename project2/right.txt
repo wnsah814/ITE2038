@@ -1,0 +1,57 @@
+New File created
+new file is made
+[Find Leaf] finding key = 35, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 35 is complete. nok = 2, leaf = 4096
+[Find Leaf] finding key = 36, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 36 is complete. nok = 3, leaf = 4096
+[Find Leaf] finding key = 37, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 37 is complete. nok = 4, leaf = 4096
+[Find Leaf] finding key = 38, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 38 is complete. nok = 5, leaf = 4096
+[Find Leaf] finding key = 39, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 39 is complete. nok = 6, leaf = 4096
+[Find Leaf] finding key = 40, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 40 is complete. nok = 7, leaf = 4096
+[Find Leaf] finding key = 41, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 41 is complete. nok = 8, leaf = 4096
+[Find Leaf] finding key = 42, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 42 is complete. nok = 9, leaf = 4096
+[Find Leaf] finding key = 43, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 43 is complete. nok = 10, leaf = 4096
+[Find Leaf] finding key = 44, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 44 is complete. nok = 11, leaf = 4096
+[Find Leaf] finding key = 45, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 45 is complete. nok = 12, leaf = 4096
+[Find Leaf] finding key = 46, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 46 is complete. nok = 13, leaf = 4096
+[Find Leaf] finding key = 47, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 47 is complete. nok = 14, leaf = 4096
+[Find Leaf] finding key = 48, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 48 is complete. nok = 15, leaf = 4096
+[Find Leaf] finding key = 49, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 49 is complete. nok = 16, leaf = 4096
+[Find Leaf] finding key = 50, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 50 is complete. nok = 17, leaf = 4096
+[Find Leaf] finding key = 51, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 51 is complete. nok = 18, leaf = 4096
+[Find Leaf] finding key = 52, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 52 is complete. nok = 19, leaf = 4096
+[Find Leaf] finding key = 53, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 53 is complete. nok = 20, leaf = 4096
+[Find Leaf] finding key = 54, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 54 is complete. nok = 21, leaf = 4096
+[Find Leaf] finding key = 55, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 55 is complete. nok = 22, leaf = 4096
+[Find Leaf] finding key = 56, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 56 is complete. nok = 23, leaf = 4096
+[Find Leaf] finding key = 57, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 57 is complete. nok = 24, leaf = 4096
+[Find Leaf] finding key = 58, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 58 is complete. nok = 25, leaf = 4096
+[Find Leaf] finding key = 59, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 59 is complete. nok = 26, leaf = 4096
+[Find Leaf] finding key = 60, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 60 is complete. nok = 27, leaf = 4096
+[Find Leaf] finding key = 61, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 61 is complete. nok = 28, leaf = 4096
+[Find Leaf] finding key = 62, left = 0, key = 34, right = 13363, is_leaf =

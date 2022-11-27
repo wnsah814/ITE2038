@@ -30,7 +30,7 @@ typedef struct record{
 
 typedef struct inter_record {
     int64_t key;
-    off_t p_offset; //page offset ?
+    off_t p_offset; //page offset
 } I_R;
 
 /// @brief HEADER(128B) + 3968B
@@ -76,9 +76,11 @@ int cut(int length);
 // int parser();
 
 void start_new_file(record rec);
+
 int db_insert(int64_t key, char * value);
 off_t insert_into_leaf(off_t leaf, record inst);
-off_t insert_into_leaf_as(off_t leaf, record inst);
+off_t insert_into_leaf_as(off_t leaf, record * temp, record inst);
+
 off_t insert_into_parent(off_t old, int64_t key, off_t newp);
 int get_left_index(off_t left);
 off_t insert_into_new_root(off_t old, int64_t key, off_t newp);
@@ -93,6 +95,12 @@ void adjust_root(off_t deloff);
 void remove_entry_from_page(int64_t key, off_t deloff);
 void usetofree(off_t wbf);
 
+// my codes
+
+char* find_value_from_leaf(off_t leaf, int64_t key);
+
+//inert into leaf with rotate
+off_t insert_into_leaf_decision(off_t leaf, record nr);
+off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr);
+off_t insert_into_internal_wr(off_t leaf, record * temp, int64_t key);
 #endif /* __BPT_H__*/
-
-

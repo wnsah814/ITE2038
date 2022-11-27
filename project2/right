@@ -1,0 +1,194 @@
+New File created
+new file is made
+[Find Leaf] finding key = 35, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 35 is complete. nok = 2, leaf = 4096
+[Find Leaf] finding key = 36, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 36 is complete. nok = 3, leaf = 4096
+[Find Leaf] finding key = 37, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 37 is complete. nok = 4, leaf = 4096
+[Find Leaf] finding key = 38, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 38 is complete. nok = 5, leaf = 4096
+[Find Leaf] finding key = 39, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 39 is complete. nok = 6, leaf = 4096
+[Find Leaf] finding key = 40, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 40 is complete. nok = 7, leaf = 4096
+[Find Leaf] finding key = 41, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 41 is complete. nok = 8, leaf = 4096
+[Find Leaf] finding key = 42, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 42 is complete. nok = 9, leaf = 4096
+[Find Leaf] finding key = 43, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 43 is complete. nok = 10, leaf = 4096
+[Find Leaf] finding key = 44, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 44 is complete. nok = 11, leaf = 4096
+[Find Leaf] finding key = 45, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 45 is complete. nok = 12, leaf = 4096
+[Find Leaf] finding key = 46, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 46 is complete. nok = 13, leaf = 4096
+[Find Leaf] finding key = 47, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 47 is complete. nok = 14, leaf = 4096
+[Find Leaf] finding key = 48, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 48 is complete. nok = 15, leaf = 4096
+[Find Leaf] finding key = 49, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 49 is complete. nok = 16, leaf = 4096
+[Find Leaf] finding key = 50, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 50 is complete. nok = 17, leaf = 4096
+[Find Leaf] finding key = 51, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 51 is complete. nok = 18, leaf = 4096
+[Find Leaf] finding key = 52, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 52 is complete. nok = 19, leaf = 4096
+[Find Leaf] finding key = 53, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 53 is complete. nok = 20, leaf = 4096
+[Find Leaf] finding key = 54, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 54 is complete. nok = 21, leaf = 4096
+[Find Leaf] finding key = 55, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 55 is complete. nok = 22, leaf = 4096
+[Find Leaf] finding key = 56, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 56 is complete. nok = 23, leaf = 4096
+[Find Leaf] finding key = 57, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 57 is complete. nok = 24, leaf = 4096
+[Find Leaf] finding key = 58, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 58 is complete. nok = 25, leaf = 4096
+[Find Leaf] finding key = 59, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 59 is complete. nok = 26, leaf = 4096
+[Find Leaf] finding key = 60, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 60 is complete. nok = 27, leaf = 4096
+[Find Leaf] finding key = 61, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 61 is complete. nok = 28, leaf = 4096
+[Find Leaf] finding key = 62, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 62 is complete. nok = 29, leaf = 4096
+[Find Leaf] finding key = 63, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 63 is complete. nok = 30, leaf = 4096
+[Find Leaf] finding key = 64, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[insert] insert 64 is complete. nok = 31, leaf = 4096
+[Find Leaf] finding key = 65, left = 0, key = 34, right = 13363, is_leaf = 1, now_root = 4096
+[leaf decision]
+[insert] key rotation failed. Root node
+[insert] insert into leaf after split
+
+8192 is new_leaf offset
+
+split_leaf is complete
+[insert] insert into new root : key = 50, old = 4096, new = 8192, nok = 1, nr = 12288
+[Find Leaf] finding key = 0, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 0 is complete. nok = 17, leaf = 4096
+[Find Leaf] finding key = 1, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 1 is complete. nok = 18, leaf = 4096
+[Find Leaf] finding key = 2, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 2 is complete. nok = 19, leaf = 4096
+[Find Leaf] finding key = 3, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 3 is complete. nok = 20, leaf = 4096
+[Find Leaf] finding key = 4, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 4 is complete. nok = 21, leaf = 4096
+[Find Leaf] finding key = 5, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 5 is complete. nok = 22, leaf = 4096
+[Find Leaf] finding key = 6, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 6 is complete. nok = 23, leaf = 4096
+[Find Leaf] finding key = 7, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 7 is complete. nok = 24, leaf = 4096
+[Find Leaf] finding key = 8, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 8 is complete. nok = 25, leaf = 4096
+[Find Leaf] finding key = 9, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 9 is complete. nok = 26, leaf = 4096
+[Find Leaf] finding key = 10, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 10 is complete. nok = 27, leaf = 4096
+[Find Leaf] finding key = 11, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 11 is complete. nok = 28, leaf = 4096
+[Find Leaf] finding key = 12, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 12 is complete. nok = 29, leaf = 4096
+[Find Leaf] finding key = 13, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 13 is complete. nok = 30, leaf = 4096
+[Find Leaf] finding key = 14, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[insert] insert 14 is complete. nok = 31, leaf = 4096
+[Find Leaf] finding key = 15, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 15 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=17, leaf=8192
+[Find Leaf] finding key = 16, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 16 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=18, leaf=8192
+[Find Leaf] finding key = 17, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 17 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=19, leaf=8192
+[Find Leaf] finding key = 18, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 18 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=20, leaf=8192
+[Find Leaf] finding key = 19, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 19 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=21, leaf=8192
+[Find Leaf] finding key = 20, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 20 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=22, leaf=8192
+[Find Leaf] finding key = 21, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 21 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=23, leaf=8192
+[Find Leaf] finding key = 22, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 22 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=24, leaf=8192
+[Find Leaf] finding key = 23, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 23 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=25, leaf=8192
+[Find Leaf] finding key = 24, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 24 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=26, leaf=8192
+[Find Leaf] finding key = 25, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 25 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=27, leaf=8192
+[Find Leaf] finding key = 26, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 26 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=28, leaf=8192
+[Find Leaf] finding key = 27, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 27 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=29, leaf=8192
+[Find Leaf] finding key = 28, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 28 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=30, leaf=8192
+[Find Leaf] finding key = 29, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert 29 is complete with right rotate.
+	 original: nok=31, leaf=4096
+	 inserted nok=31, leaf=8192
+[Find Leaf] finding key = 30, left = 4096, key = 50, right = 8192, is_leaf = 0, now_root = 12288
+[leaf decision]
+[insert] insert into leaf after split
+
+16384 is new_leaf offset
+
+split_leaf is complete
+
+bumo is 12288
+
+until here is ok
+
+rt->numofkeys2
+[Find Leaf] finding key = 31, left = 4096, key = 16, right = 16384, is_leaf = 0, now_root = 12288
+[insert] insert 31 is complete. nok = 17, leaf = 16384
+[Find Leaf] finding key = 32, left = 4096, key = 16, right = 16384, is_leaf = 0, now_root = 12288
+[insert] insert 32 is complete. nok = 18, leaf = 16384
+
