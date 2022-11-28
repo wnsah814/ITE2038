@@ -12,19 +12,11 @@
 #include <unistd.h>
 #include <inttypes.h>
 #include <string.h>
-#define LEAF_MAX 3
-#define INTERNAL_MAX 3
-// #define LEAF_MAX 31
-// #define INTERNAL_MAX 248
+// #define LEAF_MAX 3
+// #define INTERNAL_MAX 3
+#define LEAF_MAX 31
+#define INTERNAL_MAX 248
 
-/*
-
-page
-*-------------------*
-|record|record|     |
-*-------------------*
-
-*/
 typedef struct record{
     int64_t key; 
     char value[120];
@@ -64,6 +56,7 @@ extern int fd;
 extern page * rt;
 
 extern H_P * hp;
+
 // FUNCTION PROTOTYPES.
 int open_table(char * pathname);
 H_P * load_header(off_t off);
@@ -71,8 +64,10 @@ page * load_page(off_t off);
 
 void reset(off_t off);
 off_t new_page();
+
 off_t find_leaf(int64_t key);
 char * db_find(int64_t key);
+
 void freetouse(off_t fpo);
 int cut(int length);
 // int parser();
@@ -85,20 +80,24 @@ off_t insert_into_leaf_as(off_t leaf, record * temp, record inst);
 
 off_t insert_into_parent(off_t old, int64_t key, off_t newp);
 int get_left_index(off_t left);
+
 off_t insert_into_new_root(off_t old, int64_t key, off_t newp);
 off_t insert_into_internal(off_t bumo, int left_index, int64_t key, off_t newp);
 off_t insert_into_internal_as(off_t bumo, int left_index, int64_t key, off_t newp);
 
 int db_delete(int64_t key);
 void delete_entry(int64_t key, off_t deloff);
+
 void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t par_off, int64_t k_prime, int k_prime_index);
 void coalesce_pages(off_t will_be_coal, int nbor_index, off_t nbor_off, off_t par_off, int64_t k_prime);
+
 void adjust_root(off_t deloff);
+
 void remove_entry_from_page(int64_t key, off_t deloff);
+
 void usetofree(off_t wbf);
 
 // my codes
-
 char* find_value_from_leaf(off_t leaf, int64_t key);
 
 //inert into leaf with rotate

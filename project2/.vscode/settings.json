@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "ostream": "cpp",
-        "stdint.h": "c",
-        "queue.h": "c"
-    }
-}
