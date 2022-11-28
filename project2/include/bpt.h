@@ -12,8 +12,10 @@
 #include <unistd.h>
 #include <inttypes.h>
 #include <string.h>
-#define LEAF_MAX 31
-#define INTERNAL_MAX 248
+#define LEAF_MAX 3
+#define INTERNAL_MAX 3
+// #define LEAF_MAX 31
+// #define INTERNAL_MAX 248
 
 /*
 
@@ -102,5 +104,6 @@ char* find_value_from_leaf(off_t leaf, int64_t key);
 //inert into leaf with rotate
 off_t insert_into_leaf_decision(off_t leaf, record nr);
 off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr);
-off_t insert_into_internal_wr(off_t leaf, record * temp, int64_t key);
+
+off_t insert_into_internal_wr(off_t leaf, I_R * temp, int64_t key);
 #endif /* __BPT_H__*/
