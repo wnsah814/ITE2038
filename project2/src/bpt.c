@@ -363,7 +363,6 @@ off_t insert_into_leaf_as(off_t leaf, record * temp, record inst) {
     if(verbose) printf("[insert] insert into leaf after split happens\n");
     
     off_t new_leaf;
-    // record * temp;
     int insertion_index, split, i, j;
     int64_t new_key;
     new_leaf = new_page();
@@ -371,27 +370,8 @@ off_t insert_into_leaf_as(off_t leaf, record * temp, record inst) {
     page * nl = load_page(new_leaf); // new leaf
     nl->is_leaf = 1;
 
-    // // temp: 정렬을 위한 임시 페이지 -> 사이즈 + 1
-    // temp = (record *)calloc(LEAF_MAX + 1, sizeof(record));
-    // if (temp == NULL) {
-    //     perror("Temporary records array");
-    //     exit(EXIT_FAILURE);
-    // }
-
-    // 삽입 위치 찾기
-    // insertion_index = 0;
     page * ol = load_page(leaf); // original leaf
-    // while (insertion_index < LEAF_MAX && ol->records[insertion_index].key < inst.key) {
-    //     insertion_index++;
-    // }
-    
-    // temp에 copy, temp는 정렬되어있음
-    // for (i = 0, j = 0; i < ol->num_of_keys; i++, j++) {
-    //     if (j == insertion_index) j++;
-    //     temp[j] = ol->records[i];
-    // }
-    // temp[insertion_index] = inst;
-    
+
     ol->num_of_keys = 0;
     split = cut(LEAF_MAX);
 
@@ -1057,8 +1037,7 @@ void remove_entry_from_page(int64_t key, off_t deloff) {
         
         free(lp);
         return;
-    }
-    
+    }   
 }
 
 char * find_value_from_leaf(off_t leaf, int64_t key) {
@@ -1126,27 +1105,6 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
     }
 
     page * parentp = load_page(parent); //parent page
-     
-    // leaf node 의 neighbor를 찾기 위해 이 노드가 parent node에서 어디에 위치하는 지 찾는다
-
-    // int nbor_left_idx, nbor_right_idx;
-    // // 맨 왼쪽 노드인 경우
-    // if (parentp -> next_offset == leaf) {
-    //     nbor_left_idx = -2;
-    // } else {
-    //     for (int i = 0; i < parentp -> num_of_keys; ++i) {
-    //         if (parentp -> b_f[i].p_offset == leaf) {
-    //             nbor_left_idx = i - 1;
-    //             // 맨 마지막 노드
-    //             if (i == parentp -> num_of_keys - 1) {
-    //                 nbor_right_idx = -1;
-    //             } else {
-    //                 nbor_right_idx = i + 1;
-    //             }
-    //             break;
-    //         }
-    //     }
-    // }
 
     int lni; //left neighbor index
     int rni; // right neighbor index
@@ -1195,31 +1153,6 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
         }
     }
 
-    // // left most
-    // if (nbor_left_idx == -2) {
-    //     lno = -1;
-    //     rno = parentp -> b_f[0].p_offset;
-    // } 
-    // // right most
-    // else if (nbor_right_idx == -1) {
-    //     if (nbor_left_idx == -1) {
-    //         lno = parentp -> next_offset;
-    //     } else {
-    //         lno = parentp->b_f[nbor_left_idx].p_offset;
-    //     }
-    //     rno = -1;
-    // } 
-    // // first node
-    // else if  (nbor_left_idx == -1) {
-    //     lno = parentp -> next_offset;
-    //     rno = parentp -> b_f[nbor_right_idx].p_offset;
-    // }
-    // // else
-    // else {
-    //     lno = parentp->b_f[nbor_left_idx].p_offset;
-    //     rno = parentp -> b_f[nbor_right_idx].p_offset;
-    // }
-
     // 왼쪽 노드에 레코드 보내주기
     if (lno != -1) {
         lnp = load_page(lno);
@@ -1252,6 +1185,7 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
             pwrite(fd, lnp, sizeof(page), lno);
             pwrite(fd, parentp, sizeof(page), parent);
             
+            free(temp);
             free(parentp);
             free(leafp);
             free(lnp);
@@ -1285,21 +1219,25 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
             pwrite(fd, rnp, sizeof(page), rno);
             pwrite(fd, parentp, sizeof(page), parent);
             
+            free(temp);
             free(parentp);
             free(leafp);
             free(rnp);
             return rno;
         } 
     }
-    // 좌우 노드 모두 여유가 없는 경우 ( split 해야 하는 경우)
+
+    // 좌우 노드 모두 여유가 없는 경우 (split 해야 하는 경우)
     free(parentp);
     free(leafp);
     return -1;
-    // free 생각하기
-    // right neibor -> load page 안해도 되는경우: 이미 left 로 함
-    // num_of_key 생각
 }
 
+/// @brief insert record to the internal page using key rotation
+/// @param bumo internal page offset which has maxium size of keys
+/// @param temp temporary internal record array, internal_max + 1 size
+/// @param key the key from children to insert
+/// @return offset of the page where rotated key inserted
 off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
     page * selfp = load_page(bumo);
     off_t parent = selfp -> parent_page_offset;
@@ -1312,14 +1250,14 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
     page * lnp; // left neighbor page
     page * rnp; // right neigbor page
 
-    // root 일 때는 insert_into_root 실행되는 거겠지 ? 아닌 듯 ! 이거 제대로 한전지 모르겠다...
+    // root 인 경우는 split 해야한다
     if (selfp -> parent_page_offset == 0) {
-    // if (parentp -> parent_page_offset == 0) {
         free(selfp);
         free(parentp);
         if (verbose) printf("[insert] internal key rotation failed. Root node\n");
         return -1;
     }
+
     // get_left_index 로 이웃정보를 가져와도 되겠지만 io가 더 생긴다
     int i = 0;
     // leftmost
@@ -1360,55 +1298,14 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
             }
         }
     }
-    printf("lno : %ld, rno : %ld\n", lno, rno);
+    //if (verbose) printf("lno : %ld, rno : %ld\n", lno, rno);
     // 왼쪽이 공간이 있는 경우
     if (lno != -1) {
         // 왼쪽에 부모의 키값을 넣고, 포인터는 기존노드의 맨 왼족 포인터
 
         lnp = load_page(lno);
         
-        printf("printing all\n");
-        printf("parent:\n");
-        for (int i = 0; i < parentp -> num_of_keys; ++i) {
-            printf("%d %ld\n", i, parentp -> b_f[i].key);
-        }
-
-        printf("lnp:\n");
-        for (int i = 0; i < lnp -> num_of_keys; ++i) {
-            printf("%d %ld\n", i, lnp -> b_f[i].key);
-        } 
-
-        printf("selfp:\n");
-        for (int i = 0; i < selfp -> num_of_keys; ++i) {
-            printf("%d %ld\n", i, selfp -> b_f[i].key);
-        } 
-
-        printf("lnp -> nok = %d, imax = %d\n", lnp -> num_of_keys, INTERNAL_MAX);
-        
-        
-        
-        if (lnp -> num_of_keys < INTERNAL_MAX) {
-            lnp -> b_f[lnp -> num_of_keys].key = parentp -> b_f[lni + 1].key;
-            lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset; // 이게맞나
-        
-            lnp -> num_of_keys++;
-            pwrite(fd, lnp, sizeof(page), lno);
-            // free(lnp);
-
-            // 부모노드 키값은 기존 노드의 첫번째 키
-            parentp -> b_f[lni + 1].key = temp[0].key;
-            pwrite(fd, parentp, sizeof(page), parent);
-            // free(parentp);
-
-            // 기존 노드는 한칸씩 당기기
-            for (i = 0; i < selfp -> num_of_keys; ++i) {
-                selfp -> b_f[i] = temp[i + 1];
-            }
-            pwrite(fd, selfp, sizeof(page), bumo);
-            // free(selfp);
-            if (verbose) printf("[insert] internal key left rotation.\n");
-            
-
+        if (verbose) {
             printf("printing all\n");
             printf("parent:\n");
             for (int i = 0; i < parentp -> num_of_keys; ++i) {
@@ -1423,8 +1320,49 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
             printf("selfp:\n");
             for (int i = 0; i < selfp -> num_of_keys; ++i) {
                 printf("%d %ld\n", i, selfp -> b_f[i].key);
+            } 
+
+            printf("lnp -> nok = %d, imax = %d\n", lnp -> num_of_keys, INTERNAL_MAX);
+        }
+
+        if (lnp -> num_of_keys < INTERNAL_MAX) {
+            lnp -> b_f[lnp -> num_of_keys].key = parentp -> b_f[lni + 1].key;
+            lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset; // 이게맞나
+        
+            lnp -> num_of_keys++;
+            pwrite(fd, lnp, sizeof(page), lno);
+
+            // 부모노드 키값은 기존 노드의 첫번째 키
+            parentp -> b_f[lni + 1].key = temp[0].key;
+            pwrite(fd, parentp, sizeof(page), parent);
+
+            // 기존 노드는 한칸씩 당기기
+            for (i = 0; i < selfp -> num_of_keys; ++i) {
+                selfp -> b_f[i] = temp[i + 1];
             }
+            pwrite(fd, selfp, sizeof(page), bumo);
+            if (verbose) printf("[insert] internal key left rotation.\n");
             
+            if (verbose) {
+                printf("printing all\n");
+                printf("parent:\n");
+                for (int i = 0; i < parentp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, parentp -> b_f[i].key);
+                }
+
+                printf("lnp:\n");
+                for (int i = 0; i < lnp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, lnp -> b_f[i].key);
+                } 
+
+                printf("selfp:\n");
+                for (int i = 0; i < selfp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, selfp -> b_f[i].key);
+                }
+            }
+            free(lnp);
+            free(parentp);
+            free(selfp);
             return lno;
         }
     }
@@ -1432,7 +1370,9 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
     // 오른쪽이 공간이 있는 경우
     if (rno != -1) {
         if (verbose) printf("[insert] internal key right rotation.\n");
+        return rno;
     }
+
     free(selfp);
     free(parentp);
     if (verbose) printf("[insert] internal key rotation failed. No space\n");
