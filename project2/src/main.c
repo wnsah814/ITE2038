@@ -11,6 +11,7 @@ int main() {
             case 'i':
                 scanf("%ld %s", &input, buf);
                 db_insert(input, buf);
+                // printf("[insertion inserted (%ld, %s)\n", input, buf);
                 break;
             case 'f':
                 scanf("%ld", &input);
@@ -22,16 +23,17 @@ int main() {
                 }
                 else
                     printf("Not Exists\n");
-                fflush(stdout);
+                // fflush(stdout);
                 break;
             case 'd':
                 scanf("%ld", &input);
                 db_delete(input);
+                // printf("[deletion] deleted key %ld\n", input);
                 break;
             case 'q':
                 while (getchar() != (int)'\n');
                 return EXIT_SUCCESS;
-                break;   
+                break;
 
         }
         while (getchar() != (int)'\n');
