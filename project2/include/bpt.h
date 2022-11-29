@@ -12,10 +12,10 @@
 #include <unistd.h>
 #include <inttypes.h>
 #include <string.h>
-// #define LEAF_MAX 3
-// #define INTERNAL_MAX 3
-#define LEAF_MAX 31
-#define INTERNAL_MAX 248
+#define LEAF_MAX 7
+#define INTERNAL_MAX 7
+// #define LEAF_MAX 31
+// #define INTERNAL_MAX 248
 
 typedef struct record{
     int64_t key; 
@@ -98,6 +98,7 @@ void remove_entry_from_page(int64_t key, off_t deloff);
 void usetofree(off_t wbf);
 
 // my codes
+// char * dupcheck(int64_t key);
 char* find_value_from_leaf(off_t leaf, int64_t key);
 
 //inert into leaf with rotate
@@ -105,4 +106,6 @@ off_t insert_into_leaf_decision(off_t leaf, record nr);
 off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr);
 
 off_t insert_into_internal_wr(off_t leaf, I_R * temp, int64_t key);
+
+int cut_4(int length);
 #endif /* __BPT_H__*/

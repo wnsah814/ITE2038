@@ -241,7 +241,7 @@ char * db_find(int64_t key) {
     } 
 }
 
-// 부모로 올락갈 레코드 번호
+// 부모로 올라갈 레코드 번호
 int cut(int length) {
     if (length % 2 == 0)
         return length / 2;
@@ -249,6 +249,9 @@ int cut(int length) {
         return length / 2 + 1;
 }
 
+int cut_4(int length) {
+    return length / 4;
+}
 /// @brief make Header Page and root page when the first insert happens
 /// @param rec record to insert
 void start_new_file(record rec) {
@@ -289,7 +292,8 @@ int db_insert(int64_t key, char * value) {
         return 0;
     }
 
-    off_t leaf = find_leaf(key);
+    // 최적화
+    off_t leaf = find_leaf(key); // leaf page offset
     char * dupcheck = find_value_from_leaf(leaf, key); // key duplication check
     // already exits
     if (dupcheck != NULL) {
@@ -685,22 +689,23 @@ off_t insert_into_internal_as(off_t bumo, int left_index, int64_t key, off_t new
 /// @param key the key to delete
 /// @return 0 if success, otherwise nonzero value
 int db_delete(int64_t key) {
-    if (rt->num_of_keys == 0) {
+    if (rt == NULL || rt->num_of_keys == 0) {
         if (verbose) printf("root is empty\n");
         return -1;
     }
-    char * check = db_find(key);
+    
+    // 최적화
+    off_t leaf = find_leaf(key); // leaf page offset
+    char * check = find_value_from_leaf(leaf, key);
     if (check== NULL) {
         free(check);
         if (verbose) printf("There are no key to delete\n");
         return -1;
     }
     free(check);
-    // 최적화: find를 하고 deleoff 를 찾는 것은 중복된 일 아닌가
-    // 차차리 deloff 를 찾고 그 노드에서 find를 돌리는게 맞을 듯?
 
-    off_t deloff = find_leaf(key);
-    delete_entry(key, deloff);
+    // off_t deloff = find_leaf(key);
+    delete_entry(key, leaf);
     return 0;
 }
 
@@ -723,7 +728,7 @@ void delete_entry(int64_t key, off_t deloff) {
     // 만족하는 경우, 작업 끝
 
     page * not_enough = load_page(deloff);
-    int check = not_enough->is_leaf ? cut(LEAF_MAX) : cut(INTERNAL_MAX);
+    int check = not_enough->is_leaf ? cut_4(LEAF_MAX) : cut_4(INTERNAL_MAX);
     if (not_enough->num_of_keys >= check){
         free(not_enough);
         if (verbose) printf("just delete\n");
@@ -955,7 +960,7 @@ void coalesce_pages(off_t will_be_coal, int nbor_index, off_t nbor_off, off_t pa
 /// @param deloff 레코드 삭제가 일어난 페이지의 위치
 void adjust_root(off_t deloff) {
     // 루트노드는 하나의 레코드만 있어도 됨
-    if (rt->num_of_keys > 0)
+    if (rt == NULL || rt->num_of_keys > 0)
         return;
     // 루트노트가 말단노드가 아니라면
     if (!rt->is_leaf) {
@@ -1046,19 +1051,41 @@ char * find_value_from_leaf(off_t leaf, int64_t key) {
     if (leaf_page == NULL) {
         return NULL;
     }
-    int i = 0;
-    for (; i < leaf_page -> num_of_keys; ++i) {
-        if (leaf_page -> records[i].key == key) break;
+    int left = 0;
+    int right = leaf_page -> num_of_keys - 1;
+    int mid;
+    int64_t ref;    
+    while (left <= right) {
+        mid = (left + right) / 2;
+        ref = leaf_page -> records[mid].key;
+        if (ref == key) {
+            char * value = (char *)malloc(sizeof(char)  * 120);
+            strcpy(value, leaf_page -> records[mid].value);
+            free(leaf_page);
+            return value;    
+        } else if (ref < key) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
     }
-    if (i == leaf_page -> num_of_keys) {
-        free(leaf_page);
-        return NULL;
-    } else {
-        char * value = (char *)malloc(sizeof(char)  * 120);
-        strcpy(value, leaf_page -> records[i].value);
-        free(leaf_page);
-        return value;
-    }
+    free(leaf_page);
+    return NULL;
+
+    // int i = 0;
+
+    // for (; i < leaf_page -> num_of_keys; ++i) {
+    //     if (leaf_page -> records[i].key == key) break;
+    // }
+    // if (i == leaf_page -> num_of_keys) {
+    //     free(leaf_page);
+    //     return NULL;
+    // } else {
+    //     char * value = (char *)malloc(sizeof(char)  * 120);
+    //     strcpy(value, leaf_page -> records[i].value);
+    //     free(leaf_page);
+    //     return value;
+    // }
 }
 
 
@@ -1156,22 +1183,10 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
     // 왼쪽 노드에 레코드 보내주기
     if (lno != -1) {
         lnp = load_page(lno);
-        if (lnp ->num_of_keys < LEAF_MAX) {
-            // 왼쪽 노드
-            lnp -> records[lnp -> num_of_keys] = temp[0];
-            lnp -> num_of_keys++;
-
-            // 리프 노드
-            for (int i = 0; i < leafp -> num_of_keys; ++i) {
-                leafp -> records[i] = temp[i + 1];
-            }
+        if (lnp -> num_of_keys < LEAF_MAX) {
             
-            // 부모 노드
-            parentp -> b_f[lni + 1].key = leafp->records[0].key;
-
             if (verbose) {
-                printf("[insert] insert %ld is complete with left rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted nok=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, lnp ->num_of_keys, lno);
-                printf("left see..\n");
+                printf("[insert] try to insert %ld with left rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted noks=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, lnp ->num_of_keys, lno);
                 printf("lnp:\n");
                 for (int i = 0; i < lnp -> num_of_keys; ++i) {
                     printf("%d %ld\n", i, lnp -> records[i].key);
@@ -1180,7 +1195,46 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
                 for (int i = 0; i < leafp -> num_of_keys; ++i) {
                     printf("%d %ld\n", i, leafp -> records[i].key);
                 }
-            } 
+            }
+
+            int margin = LEAF_MAX - (lnp -> num_of_keys);
+            int much = (margin + 1) / 2;
+
+            for (int i = 0; i < much; ++i) {
+                lnp -> records[lnp -> num_of_keys++] = temp[i];
+            }
+
+                // leafp->nok == leaf_max
+            for (int i = 0; i < leafp -> num_of_keys - much + 1; ++i) {
+                leafp -> records[i] = temp[much + i];
+            }
+            leafp -> num_of_keys -= (much - 1);
+
+            parentp -> b_f[lni + 1].key = leafp -> records[0].key;
+
+            // // 왼쪽 노드
+            // lnp -> records[lnp -> num_of_keys] = temp[0];
+            // lnp -> num_of_keys++;
+
+            // // 리프 노드
+            // for (int i = 0; i < leafp -> num_of_keys; ++i) {
+            //     leafp -> records[i] = temp[i + 1];
+            // }
+            
+            // // 부모 노드
+            // parentp -> b_f[lni + 1].key = leafp->records[0].key;
+
+            if (verbose) {
+                printf("[insert] insert %ld is complete with left rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted nok=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, lnp ->num_of_keys, lno);
+                printf("lnp:\n");
+                for (int i = 0; i < lnp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, lnp -> records[i].key);
+                }
+                printf("leaf:\n");
+                for (int i = 0; i < leafp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, leafp -> records[i].key);
+                }
+            }
             pwrite(fd, leafp, sizeof(page), leaf);
             pwrite(fd, lnp, sizeof(page), lno);
             pwrite(fd, parentp, sizeof(page), parent);
@@ -1192,7 +1246,7 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
             return lno;
         } else {
             free(lnp);
-            if (verbose) printf("[insert] key rotation failed. No space\n");
+            if (verbose) printf("[insert] key rotation with left failed. No space\n");
         }
     } 
     
@@ -1200,20 +1254,68 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
     if (rno != -1) {
         rnp = load_page(rno);
         if (rnp -> num_of_keys < LEAF_MAX) {
-            // free(lnp);
-            // 오른쪽 노드
-            for (int i = rnp -> num_of_keys - 1; i > 0; --i) {
-                rnp -> records[i] = rnp -> records[i - 1];
+            if (verbose) {
+                printf("[insert] try to insert %ld with right rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted noks=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, rnp ->num_of_keys, rno);
+                printf("rnp:\n");
+                for (int i = 0; i < rnp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, rnp -> records[i].key);
+                }
+                printf("leaf:\n");
+                for (int i = 0; i < leafp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, leafp -> records[i].key);
+                }
             }
-            rnp -> records[0] = temp[LEAF_MAX];
-            rnp -> num_of_keys++;
 
-            //  리프 노드
-            for (int i = 0; i < leafp -> num_of_keys; ++i) {
+            int margin = LEAF_MAX - (rnp -> num_of_keys);
+            int much = (margin + 1) / 2;
+            int i, j;
+
+            // 오른쪽으로 밀고
+            for (i = 0, j = rnp -> num_of_keys - 1; i < rnp -> num_of_keys; ++i, --j) {
+                rnp -> records[j + much] = rnp -> records[j];
+            }
+
+            //much개 
+            for (i = 0; i < much; ++i) {
+                rnp -> records[much - 1 - i] = temp[LEAF_MAX - i];
+            }
+            rnp -> num_of_keys += much;
+            
+            // parent
+            parentp -> b_f[rni - 1].key = rnp -> records[0].key;
+
+            // self
+            for (i = 0; i < leafp -> num_of_keys - much - 1; ++i) {
                 leafp -> records[i] = temp[i];
             }
-            // 부모 노드
-            parentp -> b_f[rni - 1].key = nr.key;    
+            leafp -> num_of_keys -= (much - 1);
+
+            if (verbose) {
+                printf("[insert] insert %ld is complete with right rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted nok=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, rnp ->num_of_keys, rno);
+                printf("rnp:\n");
+                for (int i = 0; i < rnp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, rnp -> records[i].key);
+                }
+                printf("leaf:\n");
+                for (int i = 0; i < leafp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, leafp -> records[i].key);
+                }
+            }
+
+            // for (int i = rnp -> num_of_keys - 1; i > 0; --i) {
+            //     rnp -> records[i] = rnp -> records[i - 1];
+            // }
+            // rnp -> records[0] = temp[LEAF_MAX];
+            // rnp -> num_of_keys++;
+
+            // //  리프 노드
+            // for (int i = 0; i < leafp -> num_of_keys; ++i) {
+            //     leafp -> records[i] = temp[i];
+            // }
+            // // 부모 노드
+            // parentp -> b_f[rni - 1].key = nr.key;    
+            
+            
             if (verbose) printf("[insert] insert %ld is complete with right rotate.\n\t original: nok=%d, leaf=%ld\n\t inserted nok=%d, leaf=%ld\n", nr.key, leafp ->num_of_keys, leaf, rnp ->num_of_keys, rno);
             pwrite(fd, leafp, sizeof(page), leaf);
             pwrite(fd, rnp, sizeof(page), rno);
@@ -1225,6 +1327,7 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
             free(rnp);
             return rno;
         } 
+        free(rnp);
     }
 
     // 좌우 노드 모두 여유가 없는 경우 (split 해야 하는 경우)
@@ -1301,6 +1404,7 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
     //if (verbose) printf("lno : %ld, rno : %ld\n", lno, rno);
     // 왼쪽이 공간이 있는 경우
     if (lno != -1) {
+        // return -1;
         // 왼쪽에 부모의 키값을 넣고, 포인터는 기존노드의 맨 왼족 포인터
 
         lnp = load_page(lno);
@@ -1326,21 +1430,31 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
         }
 
         if (lnp -> num_of_keys < INTERNAL_MAX) {
+
+            int margin = INTERNAL_MAX - lnp -> num_of_keys;
+            int much = (margin + 1) / 2;
+
             lnp -> b_f[lnp -> num_of_keys].key = parentp -> b_f[lni + 1].key;
-            lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset; // 이게맞나
-        
+            lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset;
             lnp -> num_of_keys++;
+
+            for (int i = 0; i < much - 1; ++i) {
+                lnp -> b_f[lnp ->num_of_keys++] = temp[i];
+            }
+
             pwrite(fd, lnp, sizeof(page), lno);
 
-            // 부모노드 키값은 기존 노드의 첫번째 키
-            parentp -> b_f[lni + 1].key = temp[0].key;
+            parentp -> b_f[lni + 1].key = temp[much - 1].key;
+
             pwrite(fd, parentp, sizeof(page), parent);
 
-            // 기존 노드는 한칸씩 당기기
-            for (i = 0; i < selfp -> num_of_keys; ++i) {
-                selfp -> b_f[i] = temp[i + 1];
+            for (int i = 0; i < INTERNAL_MAX - much + 1; ++i) {
+                selfp -> b_f[i] = temp[much + i];
             }
+
+            selfp -> num_of_keys -= (much - 1);
             pwrite(fd, selfp, sizeof(page), bumo);
+
             if (verbose) printf("[insert] internal key left rotation.\n");
             
             if (verbose) {
@@ -1365,12 +1479,93 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
             free(selfp);
             return lno;
         }
+        free(lnp);
     }
 
     // 오른쪽이 공간이 있는 경우
     if (rno != -1) {
-        if (verbose) printf("[insert] internal key right rotation.\n");
-        return rno;
+        rnp = load_page(rno);
+        if (rnp -> num_of_keys < INTERNAL_MAX) {
+            int margin = INTERNAL_MAX - rnp -> num_of_keys;
+            int much = (margin + 1) / 2;
+            int i, j;
+
+            // 오른쪽 옮기고
+            for (i = 0, j = rnp -> num_of_keys - 1; i < rnp -> num_of_keys; ++i, --j) {
+                rnp -> b_f[j + much] = rnp -> b_f[j];
+            }
+            // 부모에서 내려오고
+            rnp -> b_f[much - 1].key = parentp -> b_f[rni - 1].key;
+            rnp -> b_f[much - 1].p_offset = selfp -> next_offset;
+
+            // much - 1만큼 temp에서 끝에서 부터 레코드채로
+            for (i = 0; i < much - 1; ++i) {
+                rnp -> b_f[much - i] = temp[INTERNAL_MAX - i];
+            }
+
+            rnp -> num_of_keys += much;
+            
+            pwrite(fd, rnp, sizeof(page), rno);
+
+            parentp -> b_f[rni - 1].key = temp[INTERNAL_MAX - much - 1].key;
+
+            pwrite(fd, parentp, sizeof(page), parent);
+
+
+            for (int i = 0; i < selfp -> num_of_keys - much - 1; ++i) {
+                selfp -> b_f[i] = temp[i];
+            }
+            selfp -> num_of_keys -= (much - 1);
+
+            pwrite(fd, selfp, sizeof(page), bumo);
+
+
+            // lnp -> b_f[lnp -> num_of_keys].key = parentp -> b_f[lni + 1].key;
+            // lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset;
+            // lnp -> num_of_keys++;
+
+            // for (int i = 0; i < much - 1; ++i) {
+            //     lnp -> b_f[lnp ->num_of_keys++] = temp[i];
+            // }
+
+            // pwrite(fd, lnp, sizeof(page), lno);
+
+            // parentp -> b_f[lni + 1].key = temp[much - 1].key;
+
+            // pwrite(fd, parentp, sizeof(page), parent);
+
+            // for (int i = 0; i < INTERNAL_MAX - much + 1; ++i) {
+            //     selfp -> b_f[i] = temp[much + i];
+            // }
+
+            // selfp -> num_of_keys -= (much - 1);
+            // pwrite(fd, selfp, sizeof(page), bumo);
+            if (verbose) printf("[insert] internal key right rotation.\n");
+        
+            if (verbose) {
+                printf("printing all\n");
+                printf("parent:\n");
+                for (int i = 0; i < parentp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, parentp -> b_f[i].key);
+                }
+
+                printf("rnp:\n");
+                for (int i = 0; i < rnp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, rnp -> b_f[i].key);
+                } 
+
+                printf("selfp:\n");
+                for (int i = 0; i < selfp -> num_of_keys; ++i) {
+                    printf("%d %ld\n", i, selfp -> b_f[i].key);
+                }
+            }
+            free(rnp);
+            free(parentp);
+            free(selfp);
+            
+            return rno;
+        }
+        free(rnp);
     }
 
     free(selfp);
