@@ -4,7 +4,9 @@ H_P * hp;
 
 page * rt = NULL; //root is declared as global
 
-int verbose = 1;
+//for debugging
+int verbose = 0;
+int dv = 1;
 
 // file descriptor 
 int fd = -1; //fd is declared as global
@@ -325,7 +327,6 @@ int db_insert(int64_t key, char * value) {
 /// @return offset of the page inserted
 off_t insert_into_leaf(off_t leaf, record inst) {
     page * p = load_page(leaf);
-
     // find 잘못 구현한 경우
     // if (p->is_leaf == 0) if (verbose) printf("iil error : it is not leaf page\n");
 
@@ -454,7 +455,7 @@ off_t insert_into_parent(off_t old, int64_t key, off_t newp) {
 
     page * parent = load_page(bumo);
     if (verbose) printf("\nbumo is %ld\n", bumo);
-    fflush(stdout); // clean
+    // fflush(stdout); // clean
     // if internal node has enough space
     if (parent->num_of_keys < INTERNAL_MAX) {
         free(parent);
@@ -1108,7 +1109,7 @@ off_t insert_into_leaf_wr(off_t leaf, record * temp, record nr) {
     page * leafp = load_page(leaf); // leaf page
     off_t parent = leafp -> parent_page_offset; //parent page offset
     // if (verbose) printf("[key rotation] leaf: %ld, parent_offset: %ld\n", leaf, parent);
-    fflush(stdout); //clear
+    // fflush(stdout); //clear
     // root 인경우는 split 해야한다.
     if (parent == 0) {
         free(leafp);
@@ -1363,7 +1364,7 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
     //if (verbose) printf("lno : %ld, rno : %ld\n", lno, rno);
     // 왼쪽이 공간이 있는 경우
     if (lno != -1) {
-        // return -1;
+        return -1;
         // 왼쪽에 부모의 키값을 넣고, 포인터는 기존노드의 맨 왼족 포인터
 
         lnp = load_page(lno);
@@ -1391,7 +1392,12 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
         if (lnp -> num_of_keys < INTERNAL_MAX) {
 
             int margin = INTERNAL_MAX - lnp -> num_of_keys;
-            int much = (margin + 1) / 2;
+            int much;
+            if (margin % 2 == 0) {
+                much = margin / 2 + 1;
+            } else {
+                much = (margin + 1) / 2;
+            }
 
             lnp -> b_f[lnp -> num_of_keys].key = parentp -> b_f[lni + 1].key;
             lnp -> b_f[lnp -> num_of_keys].p_offset = selfp -> next_offset;
@@ -1412,6 +1418,7 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
             }
 
             selfp -> num_of_keys -= (much - 1);
+
             pwrite(fd, selfp, sizeof(page), bumo);
 
             if (verbose) printf("[insert] internal key left rotation.\n");
@@ -1443,6 +1450,8 @@ off_t insert_into_internal_wr(off_t bumo, I_R * temp, int64_t key) {
 
     // 오른쪽이 공간이 있는 경우
     if (rno != -1) {
+        return -1;
+
         rnp = load_page(rno);
         if (rnp -> num_of_keys < INTERNAL_MAX) {
             int margin = INTERNAL_MAX - rnp -> num_of_keys;
