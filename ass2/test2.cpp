@@ -114,7 +114,8 @@ int main(){
 			while (getline(block[11], buffer[1])) {
 				temp1.set_name_salary(buffer[1]);
 				if (temp0.name == temp1.name) {
-					output << temp0.name << ',' << temp0.age << ',' << temp1.salary << '\n';
+					output << make_tuple(temp0.name, temp0.age, temp1.salary);
+					// output << temp0.name << ',' << temp0.age << ',' << temp1.salary << '\n';
 					break;
 				}
 			}

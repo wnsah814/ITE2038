@@ -200,7 +200,8 @@ int main(){
 			while (getline(block[1], buffer[1])) {
 				temp2.set_number(buffer[1]);
 				if (temp2.student_name == buffer[0]) {
-					output << temp2.student_name << ',' << temp2.student_number << '\n';
+					output << make_tuple(temp2.student_name, temp2.student_number);
+					// output << temp2.student_name << ',' << temp2.student_number << '\n';
 					break;
 				}
 			}
